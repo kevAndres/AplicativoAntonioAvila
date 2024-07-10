@@ -176,4 +176,9 @@ export class EstudiantesService {
       );
     }
   }
+
+
+  getEstudiantes(cursoId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/estudiante/curso/${cursoId}`);
+  }
 }

@@ -91,7 +91,7 @@ export class HomePage implements OnInit {
         this.router.navigate(['/paguinainicial']);
         break;
       case 'INS':
-        this.router.navigate(['/tabs']);
+        this.router.navigate(['/tabs/atrasos']);
         break;
       default:
         this.router.navigate(['/home']); // Ruta por defecto o manejo de error

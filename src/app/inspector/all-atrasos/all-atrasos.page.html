@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons>
-      <ion-title>UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO </ion-title>
+      <ion-title>UNIDAD EDUCATIVA ANTONIO ÁVILA  </ion-title>
       <ion-button slot="end" shape="round"
         name="person-circle-outline"><ion-icon name="person-circle-outline">
         </ion-icon> {{ username
@@ -20,7 +20,7 @@
     <ion-list>
       <ion-item *ngFor="let atrasos of atrasosByInspector">
         <ion-label>
-          <ion-card-title><strong>FECHA :</strong> {{ atrasos.registroFecha }}<br> </ion-card-title>
+          <ion-card-title><strong>FECHA :</strong> {{ atrasos.registroFecha }}    Hora :{{ atrasos.registroHora }}<br> </ion-card-title>
           <ion-card-subtitle><strong>ESTUDIANTE :</strong> {{ atrasos.estudiante.NombreEst }} {{ atrasos.estudiante.ApellidoEst }}<br></ion-card-subtitle>
           <ion-card-subtitle><strong>CURSO :</strong> {{ atrasos.estudiante.curso_idCurso }} <br></ion-card-subtitle>
         </ion-label>

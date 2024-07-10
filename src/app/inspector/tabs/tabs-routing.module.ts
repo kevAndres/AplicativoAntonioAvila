@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'atrasos',
         loadChildren: () => import('../../atrasos/atrasos.module').then(m => m.AtrasosPageModule)
       },
+      {
+        path: 'filtros',
+        loadChildren: () => import('../../inspector/filtros/filtros.module').then(m => m.FiltrosPageModule)
+      },
       
       {
         path: '',

@@ -64,6 +64,23 @@ const routes: Routes = [
     path: 'configuracion',
     loadChildren: () => import('./inspector/configuracion/configuracion.module').then(m => m.ConfiguracionPageModule)
   },
+  {
+    path: 'filtros',
+    loadChildren: () => import('./inspector/filtros/filtros.module').then( m => m.FiltrosPageModule)
+  },  {
+    path: 'reporte-xcurso',
+    loadChildren: () => import('./inspector/reporte-xcurso/reporte-xcurso.module').then( m => m.ReporteXcursoPageModule)
+  },
+  {
+    path: 'reporte-xestudiante',
+    loadChildren: () => import('./inspector/reporte-xestudiante/reporte-xestudiante.module').then( m => m.ReporteXestudiantePageModule)
+  },
+  {
+    path: 'reporte-xfecha',
+    loadChildren: () => import('./inspector/reporte-xfecha/reporte-xfecha.module').then( m => m.ReporteXfechaPageModule)
+  },
+
+
 ];
 
 @NgModule({
