@@ -79,8 +79,8 @@ export class PaguinaprincipalrepresentantePage implements OnInit, OnDestroy {
 
 
     console.log(localStorage.getItem('IdEstCurForEsquelas'));
-    console.log(estudiante.NombreEst);
-    console.log(estudiante.ApellidoEst);
+    console.log(localStorage.getItem('NombreEstudiante'));
+    console.log(localStorage.getItem('ApellidoEstudiante'));
 
 
   }

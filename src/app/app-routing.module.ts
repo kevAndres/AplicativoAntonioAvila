@@ -139,7 +139,74 @@ const routes: Routes = [
     path: 'unauthorized',
     loadChildren: () => import('../Component/unauthorized/unauthorized/unauthorized.module').then(m => m.UnauthorizedPageModule)
   
+  },
+  //YO AGREGE ESTAS RUTAS NO LE ELIMINES LA HACER EL MERGE
+  { path: 'curso-crud',
+    loadChildren: () => import('./inspector/curso-crud/curso-crud.module').then(m => m.CursoCRUDPageModule),
+    canActivate: [AuthGuard,RoleGuard],
+    data: { expectedRoles: ['inspector','administrador'] }
+   },
+  {
+    path: 'asignatura-crud',
+    loadChildren: () => import('./inspector/asignatura-crud/asignatura-crud.module').then( m => m.AsignaturaCrudPageModule),
+    canActivate: [AuthGuard,RoleGuard],
+    data: { expectedRoles: ['inspector','administrador'] }
+  },
+  {
+    path: 'docente-crud',
+    loadChildren: () => import('./inspector/docente-crud/docente-crud.module').then( m => m.DocenteCrudPageModule),
+    canActivate: [AuthGuard,RoleGuard],
+    data: { expectedRoles: ['inspector','administrador'] }
+  },
+  {
+    path: 'representante-crud',
+    loadChildren: () => import('./inspector/representante-crud/representante-crud.module').then( m => m.RepresentanteCrudPageModule),
+    canActivate: [AuthGuard,RoleGuard],
+    data: { expectedRoles: ['inspector','administrador'] }
+  },
+  {
+  path: 'estudiante-crud',
+  loadChildren: () => import('./inspector/estudiante-crud/estudiante-crud.module').then( m => m.EstudianteCrudPageModule),
+  canActivate: [AuthGuard,RoleGuard],
+  data: { expectedRoles: ['inspector','administrador'] }
+},
+  {
+    path: 'vista-atrasos-representante',
+    loadChildren: () => import('./Representantes/vista-atrasos-representante/vista-atrasos-representante.module').then( m => m.VistaAtrasosRepresentantePageModule),
+    canActivate: [AuthGuard,RoleGuard],
+    data: { expectedRoles: ['representante'] }
+  },
+  {
+    path: 'inicioadmin',
+    loadChildren: () => import('./admin/inicioadmin/inicioadmin.module').then( m => m.InicioadminPageModule),
+    canActivate: [AuthGuard,RoleGuard],
+    data: { expectedRoles: ['administrador'] }
+  },
+  {
+    path: 'inspector-crud',
+    loadChildren: () => import('./admin/inspector-crud/inspector-crud.module').then( m => m.InspectorCrudPageModule)
+  },
+  {
+    path: 'pdf-curso',
+    loadChildren: () => import('./inspector/pdf-curso/pdf-curso.module').then( m => m.PdfCursoPageModule)
+  },
+  {
+    path: 'pdf-estudiante',
+    loadChildren: () => import('./inspector/pdf-estudiante/pdf-estudiante.module').then( m => m.PdfEstudiantePageModule)
+  },
+  {
+    path: 'pdf-fecha',
+    loadChildren: () => import('./inspector/pdf-fecha/pdf-fecha.module').then( m => m.PdfFechaPageModule)
+  },
+  {
+    path: 'pdf-docente',
+    loadChildren: () => import('./inspector/pdf-docente/pdf-docente.module').then( m => m.PdfDocentePageModule)
   }
+
+
+
+
+
 
 
 ];

@@ -1,8 +1,18 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';  
-import jsQR from 'jsqr';
-import { EstudiantesService } from '../../../app/services/getestudiantes/estudiantes.service';
+import {
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  NgZone,
+} from '@angular/core';
+import {
+  BarcodeScanner,
+  BarcodeFormat,
+  LensFacing,
+  StartScanOptions,
+  BarcodeScannedEvent,
+} from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
+import { EstudiantesService } from '../../../app/services/getestudiantes/estudiantes.service';
 
 @Component({
   selector: 'app-scanner-qr',
@@ -10,79 +20,79 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./scanner-qr.component.scss'],
 })
 export class ScannerQRComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
-  @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
   qrCodeData: string | null = null;
-  videoStream: MediaStream | null = null;  // Variable para almacenar el stream de video
-  estudiantes_idEstudiantes: string | null = null;     // Variable para almacenar el id del estudiante
+  estudiantes_idEstudiantes: string | null = null;
+  private listener: any;
+  public isTorchAvailable = false;
 
   constructor(
-    private router: Router,
     private estudiantesService: EstudiantesService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private ngZone: NgZone
   ) {}
 
-  ngAfterViewInit() {
-    this.startVideo();
-  }
-
-  async startVideo() {
-    try {
-      const constraints = {
-        video: {
-          facingMode: 'environment',
-        },
-      };
-
-      this.videoStream = await navigator.mediaDevices.getUserMedia(constraints);
-      const video = this.videoElement.nativeElement;
-
-      if (video) {
-        video.srcObject = this.videoStream;
-        video.setAttribute('playsinline', ''); 
-
-        await new Promise<void>((resolve, reject) => {
-          video.onloadedmetadata = () => {
-            resolve(video.play());
-          };
-          video.onerror = (error) => {
-            reject(error);
-          };
-        });
-
-        this.scanQRCode();
-      }
-    } catch (error) {
-      console.error('Error accessing the camera: ', error);
-      alert('Error accessing the camera: ' + error);
+  async ngAfterViewInit() {
+    const hasPermission = await this.checkCameraPermission();
+    if (hasPermission) {
+      await this.checkTorchAvailability();
+      this.startScan();
     }
   }
 
-  scanQRCode() {
-    const canvas = this.canvasElement.nativeElement;
-    const context = canvas.getContext('2d');
-    const video = this.videoElement.nativeElement;
+  async ngOnDestroy() {
+    await this.stopScan();
+  }
 
-    const tick = () => {
-      if (video.readyState === video.HAVE_ENOUGH_DATA && context) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const code = jsQR(imageData.data, imageData.width, imageData.height);
+  private async checkCameraPermission() {
+    const permission = await BarcodeScanner.checkPermissions();
+    if (permission.camera !== 'granted') {
+      const response = await BarcodeScanner.requestPermissions();
+      return response.camera === 'granted';
+    }
+    return true;
+  }
 
-        if (code) {
-          this.qrCodeData = code.data;
-          this.getEstudianteData(code.data);  // Obtener datos del estudiante
+  private async checkTorchAvailability() {
+    const result = await BarcodeScanner.isTorchAvailable();
+    this.isTorchAvailable = result.available;
+  }
+
+  private async startScan() {
+    try {
+      document.querySelector('body')?.classList.add('barcode-scanning-active');
+
+      const options: StartScanOptions = {
+        formats: [BarcodeFormat.QrCode],
+        lensFacing: LensFacing.Back,
+      };
+
+      this.listener = await BarcodeScanner.addListener(
+        'barcodeScanned',
+        async (event: BarcodeScannedEvent) => {
+          this.ngZone.run(() => {
+            const barcodeData = event.barcode.displayValue;
+            if (barcodeData) {
+              this.qrCodeData = barcodeData;
+              this.getEstudianteData(barcodeData);
+              this.stopScan();
+            }
+          });
         }
-      }
+      );
 
-      if (!this.qrCodeData) {
-        requestAnimationFrame(tick);
-      }
-    };
+      await BarcodeScanner.startScan(options);
+    } catch (error) {
+      console.error('Error:', error);
+      this.presentError('Error al iniciar el escaneo: ' + error);
+    }
+  }
 
-    tick();
+  private async stopScan() {
+    document.querySelector('body')?.classList.remove('barcode-scanning-active');
+    await BarcodeScanner.stopScan();
+    if (this.listener) {
+      this.listener.remove();
+    }
   }
 
   async getEstudianteData(codigo: string) {
@@ -92,7 +102,7 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
       this.presentAlert(estudiante.NombreEst, estudiante.ApellidoEst, estudiante.cedula);
     } catch (error) {
       console.error('Error al obtener los datos del estudiante', error);
-      alert('Error al obtener los datos del estudiante: ' + error);
+      this.presentError('Error al obtener los datos del estudiante: ' + error);
     }
   }
 
@@ -101,6 +111,13 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
       header: 'Registrar Atraso',
       message: `Registrar Atraso al estudiante ${nombre} ${apellido} con cédula ${cedula}.`,
       buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            this.startScan();
+          }
+        },
         {
           text: 'OK',
           handler: () => {
@@ -122,14 +139,16 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
       next: (response) => {
         console.log('Atraso registrado exitosamente', response);
         this.presentConfirmacion('Atraso registrado exitosamente');
-        this.qrCodeData = null;  // Reiniciar el valor del código QR para permitir un nuevo escaneo
-        this.scanQRCode();  // Reiniciar el escaneo después del registro
+        this.qrCodeData = null; // Reiniciar el valor del código QR para permitir un nuevo escaneo
+        this.startScan();
+
       },
       error: (error) => {
         console.error('Error al registrar el atraso', error);
         this.presentError('Error al registrar el atraso');
-        this.qrCodeData = null;  // Reiniciar el valor del código QR para permitir un nuevo escaneo
-        this.scanQRCode();  // Reiniciar el escaneo después del registro
+        this.qrCodeData = null; // Reiniciar el valor del código QR para permitir un nuevo escaneo
+        this.startScan();
+
       }
     });
   }
@@ -154,14 +173,7 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
     await alert.present();
   }
 
-  ngOnDestroy() {
-    this.stopVideo();  // Detener el video cuando el componente se destruya
-  }
-
-  stopVideo() {
-    if (this.videoStream) {
-      this.videoStream.getTracks().forEach(track => track.stop());
-      this.videoStream = null;
-    }
+  async toggleTorch(): Promise<void> {
+    await BarcodeScanner.toggleTorch();
   }
 }

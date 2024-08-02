@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/paguinaprincipalrepresentante"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles de los atrasos </ion-title>
+    <ion-button slot="end" shape="round" name="person-circle-outline"><ion-icon name="person-circle-outline"> </ion-icon> {{ username }}</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="4" offset-md="4" size-lg="6" offset-lg="3">
+        <ion-card *ngFor="let atraso of atrasos" button (click)="toggleDetails(atraso)" >
+          <ion-card-header >
+            <ion-toolbar color="primary" class="rounded-border">
+              <ion-label class="center-label"><img  src="assets/img/escudo(1).png" alt="Escudo" style="width: 30px; height: auto"/> UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO  </ion-label>
+            </ion-toolbar>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col>
+                  <ion-card-title><strong> Fecha del Atraso registrado : </strong>{{ atraso.registroFecha }}  a la hora {{ atraso.registroHora }}<br></ion-card-title>
+                  <div  *ngIf="atraso.detailsVisible">
+                    <ion-card-title><strong> Estudiante: </strong>{{Nombreestudiante}}{{Apellidosestudiante}}<br>  </ion-card-title>
+                  </div>
+              </ion-col>
+
+            </ion-row>
+          </ion-card-content>
+
+        </ion-card>
+        
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

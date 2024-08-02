@@ -39,14 +39,7 @@ export class AtrasosPage implements OnInit {
       descripcion: [''],
       curso_idCurso: ['', [Validators.required]],
       EstudianteCurso: ['', [Validators.required]],
-      cedula: [
-        '',
-        [
-          this.numberValidator(),
-          Validators.minLength(10),
-          Validators.maxLength(10),
-        ],
-      ],
+      cedula: [ '', [ this.numberValidator(),  Validators.minLength(10),  Validators.maxLength(10)] ],
     });
   }
 

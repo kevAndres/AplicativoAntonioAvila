@@ -1,0 +1,60 @@
+/* vista-esquela.component.css */
+/* vista-esquela.component.css */
+ion-card {
+    margin: 10px;
+  }
+  
+  ion-card-content p {
+    font-size: 1rem;
+  }
+  
+  ion-img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .center-label {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    width: 100%; /* Asegúrate de que el label ocupe el ancho completo del contenedor */
+    font-size: 16px; /* Cambia esto al tamaño que desees */
+    align-items: center;    /* Alinea verticalmente al centro */
+
+  }
+  .center-row-content {
+    display: flex;
+    //justify-content: center; /* Centra el contenido horizontalmente */
+    width: 100%;
+    font-size: 16px; /* Cambia esto al tamaño que desees */
+    color: white;
+  }
+  .center-labelDescription {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    width: 100%; /* Asegúrate de que el label ocupe el ancho completo del contenedor */
+    font-size: 16px; /* Cambia esto al tamaño que desees */
+    color: white;
+
+  }
+  .p-esquela {
+    display: flex;
+    width: 100%; 
+    font-size: 14px; /* Cambia esto al tamaño que desees */
+    //color: #000; /* Color inicial del texto */
+
+    /* Asegúrate de que el label ocupe el ancho completo del contenedor */
+    /* Asegúrate de que el label ocupe el ancho completo del contenedor */
+  }
+  .rounded-border {
+    border-radius: 20px;
+}
+.img-carnet {
+
+  width: 320px; /* Ancho de la imagen */
+  height: 200px; /* Altura de la imagen */
+  object-fit: cover; /* Asegura que la imagen cubra completamente el contenedor sin distorsionarse */
+  border-radius: 8px; /* Bordes ligeramente redondeados, opcional */
+  margin-left: auto;   /* Margen izquierdo automático */
+  margin-right: auto;  /* Margen derecho automático */
+
+}

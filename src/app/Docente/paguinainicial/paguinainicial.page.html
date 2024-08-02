@@ -1,3 +1,4 @@
+<!--este es el menu lateral de la paguina-->
 <ion-menu side="start" menuId="first" contentId="main-content">
   <ion-header>
     <ion-toolbar color="primary">
@@ -29,7 +30,7 @@
 </ion-menu>
 
 <ion-router-outlet id="main-content"></ion-router-outlet>
-
+<!--este es el encabezado de la paguina-->
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -46,7 +47,7 @@
     <ion-title> Docente</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<!--este es el cuerpo de la paguina-->
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row>
@@ -84,13 +85,9 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-
-<ion-fab
-  slot="fixed"
-  vertical="bottom"
-  horizontal="end"
-  routerLink="/registroasignatura">
-  <ion-fab-button>
-    <ion-icon name="add"></ion-icon>
+<!--boton flotante-->
+<ion-fab  slot="fixed" vertical="bottom" horizontal="end" routerLink="/registroasignatura" class="tooltip-container">
+  <ion-fab-button>  <ion-icon name="add"></ion-icon>
   </ion-fab-button>
+    <span class="tooltip-text">Click para Registrar una nueva Asignatura</span>
 </ion-fab>

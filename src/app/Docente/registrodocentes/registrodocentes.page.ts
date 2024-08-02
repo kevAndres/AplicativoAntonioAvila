@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController,LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registrodocentes',
@@ -16,7 +16,8 @@ export class RegistrodocentesPage {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadingController: LoadingController,
   ) {
     // Aquí inicializamos el FormGroup utilizando el FormBuilder
     this.formularioDocente = this.formBuilder.group({
@@ -40,6 +41,15 @@ export class RegistrodocentesPage {
 
     await alert.present();
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Por favor, espere...',
+    });
+    await loading.present();
+    return loading;
+  }
+
 //metodo de alerta de confirmacion de registro
   async presentConfirmacion(message: string) {
     const alert = await this.alertController.create({
@@ -51,8 +61,9 @@ export class RegistrodocentesPage {
     await alert.present();
   }
   // Este método se llamará cuando el formulario se intente enviar
-  registrarDocente() {
+  async registrarDocente() {
     if (this.formularioDocente.valid) {
+      const loading = await this.presentLoading();
       // Construye el objeto de datos con la información del formulario
       const datosRegistro = {
         nombre: this.formularioDocente.value.nombre,
@@ -66,14 +77,17 @@ export class RegistrodocentesPage {
 
       // Llama al método register del servicio authService y pasa los datos
       this.authService.registerDocente(datosRegistro).subscribe({
-        next: (response) => {
+        next: async (response) => {
+          
           console.log('Registro exitoso', response);
+          await loading.dismiss();
           this.presentConfirmacion('Resgistro Exitoso');
           // Navega a la ruta que desees tras un registro exitoso, por ejemplo '/login'
           this.router.navigate(['/home']);
         },
-        error: (error) => {
+        error: async (error) => {
           console.error('Error en el registro', error);
+          await loading.dismiss();
           let mensajeError =
             'Ocurrió un error al intentar registrar. Por favor, intenta de nuevo.';
           if (error.error && error.error.message) {

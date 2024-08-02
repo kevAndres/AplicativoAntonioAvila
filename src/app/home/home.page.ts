@@ -53,6 +53,7 @@ export class HomePage implements OnInit {
   async dismissLoading() {
     await this.loadingController.dismiss();
   }
+
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
       this.redirectBasedOnRole();
@@ -68,13 +69,13 @@ export class HomePage implements OnInit {
             console.log('Inicio de sesión exitoso');
             this.redirectBasedOnRole();
           } else {
+            this.dismissLoading();
             console.log('Inicio de sesión fallido');
-            // Manejar el inicio de sesión fallido según tu lógica
           }
         },
         error: (error) => {
+          this.dismissLoading();
           console.error('Error en el inicio de sesión', error);
-          // Manejar el error según tu lógica
         },
         complete: () => {
           this.dismissLoading(); // Descarta el loading cuando la solicitud completa (ya sea éxito o error)
@@ -96,6 +97,9 @@ export class HomePage implements OnInit {
       case 'INS':
         this.router.navigate(['/tabs/atrasos']);
         break;
+        case 'ADM':
+          this.router.navigate(['/inicioadmin/configuracion']);
+          break;
       default:
         this.router.navigate(['/home']); // Ruta por defecto o manejo de error
         break;

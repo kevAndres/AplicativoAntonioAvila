@@ -1,21 +1,24 @@
 <ion-header>
+ 
+
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons>
       <ion-title>UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO </ion-title>
-      <ion-button slot="end" shape="round" name="person-circle-outline"><ion-icon name="person-circle-outline"> </ion-icon> {{ username }}</ion-button>
-
+      <ion-button slot="end" shape="round"
+        name="person-circle-outline"><ion-icon name="person-circle-outline">
+        </ion-icon> {{ username
+        }}</ion-button>
     </ion-buttons>
-    <ion-title > Inspector</ion-title>
+    <ion-title> Inspector</ion-title>
   </ion-toolbar>
-</ion-header>
 
+</ion-header>
 <ion-header>
   <ion-toolbar>
     <ion-title>Registro de Atrasos de Estudiantes</ion-title>
-    
   </ion-toolbar>
 </ion-header>
 
@@ -24,15 +27,13 @@
     <ion-row>
       <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4"> 
         <ion-list>
-          <div class="image-center">
-            <img src="assets/img/escudo(1).png" alt="Escudao" style="width: 100px; height: auto;">
-          </div>
+
           <ion-card-subtitle>Ingrese sus datos</ion-card-subtitle>
           <form [formGroup]="formularioatrasos" (ngSubmit)="registrarAtraso()">
             <ion-item>
               <ion-label position="floating">Cédula</ion-label>
               <ion-input type="text" formControlName="cedula"></ion-input>
-              <ion-button slot="end" (click)="searchByCedula()"> <ion-icon name="search-outline" ></ion-icon></ion-button>
+              <ion-button  [disabled]="!formularioatrasos.get('cedula')?.valid" slot="end" (click)="searchByCedula()" > <ion-icon name="search-outline" ></ion-icon></ion-button>
             </ion-item>
 
 
@@ -62,7 +63,7 @@
 
             <ion-button routerLink="/scanner-qr"> Scanear QR</ion-button>
 
-            <ion-button type="submit" expand="block" [disabled]="!formularioatrasos.get('curso_idCurso')?.valid || !formularioatrasos.get('EstudianteCurso')?.valid" class="custom-buttonregister"> <ion-icon name="add-outline" ></ion-icon>Registrar</ion-button>
+            <ion-button type="submit" expand="block" [disabled]="!formularioatrasos.get('EstudianteCurso')?.valid || !formularioatrasos.get('curso_idCurso')?.valid" class="custom-buttonregister"> <ion-icon name="add-outline" ></ion-icon>Registrar</ion-button>
           </form>
         </ion-list>
       </ion-col>

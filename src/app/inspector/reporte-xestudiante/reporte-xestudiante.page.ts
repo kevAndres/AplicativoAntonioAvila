@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { APIURL } from '../../../Shares/UrlApi';
 import { HttpClient } from '@angular/common/http';
 import { EstudiantesService } from '../../services/getestudiantes/estudiantes.service';
+import { LoadingController,AlertController  } from '@ionic/angular';
 @Component({
   selector: 'app-reporte-xestudiante',
   templateUrl: './reporte-xestudiante.page.html',
@@ -14,7 +15,7 @@ export class ReporteXestudiantePage implements OnInit {
   selectedEstudianteId: string | null = null;
   url: string = APIURL
 
-  constructor(private EstudiantesService: EstudiantesService,private http: HttpClient) { }
+  constructor( private alertController: AlertController,private EstudiantesService: EstudiantesService,private http: HttpClient,private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.loadCursos()
@@ -38,12 +39,29 @@ export class ReporteXestudiantePage implements OnInit {
   }
   
 
-  downloadFile(): void {
-    if (this.selectedEstudianteId) {
-      const downloadUrl = `${this.url}/atraso/reporte/estudiante/${this.selectedEstudianteId}`;
-      window.location.href = downloadUrl;
-    } else {
-      console.log('Please select a fruit before downloading.');
+  async downloadFile(): Promise <void> {
+    if (!this.selectedCursoId) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Por favor, seleccione un estudiante',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
+    if (this.selectedEstudianteId) {
+      const loading = await this.loadingController.create({
+        message: 'DESCARGANDO, POR FAVOR ESPERAR ...',
+      });
+      await loading.present();
+      try {
+        const downloadUrl = `${this.url}/atraso/reporte/estudiante/${this.selectedEstudianteId}`;
+      window.location.href = downloadUrl;
+      } catch (error) {
+        console.error('Download failed', error);
+      }finally {
+        await loading.dismiss();
+      }
+      
+    } 
   }
 }

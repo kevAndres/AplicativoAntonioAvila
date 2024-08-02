@@ -1,0 +1,11 @@
+page-atrasos {
+    ion-content {
+      --background: url('/assets/images/background.jpg') no-repeat center center / cover;
+      --background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+  }

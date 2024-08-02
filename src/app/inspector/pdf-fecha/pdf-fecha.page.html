@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/filtros"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Generar reporte atrasos </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4"> 
+        <ion-list>
+          <div class="image-center">
+            <img src="assets/img/escudo(1).png" alt="Escudao" style="width: 100px; height: auto;">
+          </div>
+          <br>
+          <ion-label>
+            <h3>SELECCIONE EL DIA DEL QUE QUIERA DESCARGAR EL REPORTE :
+            </h3>
+          </ion-label>
+
+          
+          <ion-item>
+            <ion-datetime   [(ngModel)]="selectedDate" presentation="date"></ion-datetime>
+          </ion-item>
+          <ion-button (click)="downloadFile()">DESCARGAR REPORTE <ion-icon name="document-text-outline"></ion-icon> </ion-button>
+         
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,14 +1,12 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/atrasos"></ion-back-button>
     </ion-buttons>
-    <ion-buttons>
-      <ion-title>UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO </ion-title>
-    </ion-buttons>
-    <ion-title> Inspector</ion-title>
+    <ion-title>Inspector</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-header>
   <ion-toolbar>
     <ion-title>Lector - QR</ion-title>
@@ -16,20 +14,5 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
-        <ion-list>
-
-          <div
-            style="display: flex; justify-content: center; align-items: center; height: 100%;">
-            <video #videoElement style="width: 300px; height: 300px; "></video>
-            <canvas #canvasElement style="display: none;"></canvas>
-          </div>
-
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+  <div #square class="square"></div>
 </ion-content>

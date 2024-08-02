@@ -9,8 +9,8 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../all-atrasos/all-atrasos.module').then(m => m.AllAtrasosPageModule)
+        path: 'configuracion',
+        loadChildren: () => import('../configuracion/configuracion.module').then(m => m.ConfiguracionPageModule)
       },
       {
         path: 'atrasos',

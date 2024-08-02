@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../app/services/getProfile/profile.service'; // Ajusta la ruta según la ubicación de tu servicio
-import { ModalController } from '@ionic/angular'; // Importar ModalController
+import { ModalController, AlertController } from '@ionic/angular'; // Importar ModalController y AlertController
+import { Filesystem, Directory } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-vista-usuario',
@@ -11,13 +12,16 @@ export class VistaUsuarioComponent implements OnInit {
   userInfo: any = null;
   QR: string = ''; // Inicializa como una cadena vacía para almacenar el QR
 
-  constructor(private ProfileService: ProfileService,
-    private modalController: ModalController
+  constructor(
+    private ProfileService: ProfileService,
+    private modalController: ModalController,
+    private alertController: AlertController // Inyectar AlertController
   ) {}
 
   ngOnInit() {
     this.fetchUserInfo();
   }
+
   fetchUserInfo() {
     this.ProfileService.getUsuario().subscribe(
       data => {
@@ -29,29 +33,54 @@ export class VistaUsuarioComponent implements OnInit {
       }
     );
   }
+
   close() {
     this.modalController.dismiss(); // Cierra el modal
   }
 
-
-  ShowQR() {
+  async ShowQR() {
     this.ProfileService.getQR().subscribe(
-      data => {
+      async data => {
         console.log('QR Realizado:', data); // Verificar los datos recibidos
         this.QR = data.qrCodeDataURL;
 
-        
-        // Crear un enlace de descarga y activarlo
-        const link = document.createElement('a');
-        link.href = this.QR;
-        link.download = 'QR de Estudiante.jpg';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        try {
+          // Convertir dataURL a Blob
+          const response = await fetch(this.QR);
+          const blob = await response.blob();
+          const reader = new FileReader();
+          reader.onloadend = async () => {
+            const base64data = reader.result?.toString().split(',')[1];
+            if (base64data && this.userInfo) {
+              const userName = `${this.userInfo.NombreEst}_${this.userInfo.ApellidoEst}`.replace(/ /g, '_');
+              await Filesystem.writeFile({
+                path: `${userName}_QR.png`,
+                data: base64data,
+                directory: Directory.Documents
+              });
+              console.log('Archivo guardado correctamente');
+              this.presentAlert('Archivo guardado correctamente en la carpeta de documentos');
+            }
+          };
+          reader.readAsDataURL(blob);
+        } catch (error) {
+          console.error('Error al guardar el archivo', error);
+          this.presentAlert('Error al guardar el archivo: ' + error);
+        }
       },
       error => {
         console.error('Error al Generar el QR', error);
+        this.presentAlert('Error al Generar el QR: ' + error);
       }
     );
+  }
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Información',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }

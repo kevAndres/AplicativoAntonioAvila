@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicioadmin/configuracion"></ion-back-button>
+    </ion-buttons>
+    <ion-title>CRUD DE INSPECTOR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid>
+    <!-- Encabezados de la tabla -->
+    <ion-row class="table-header">
+      <ion-col><h2>ID INSPECTOR</h2></ion-col>
+      <ion-col><h2>NOMBRE</h2></ion-col>
+      <ion-col><h2>APELLIDO</h2></ion-col>
+      <ion-col><h2>CÉDULA</h2></ion-col>
+      <ion-col><h2>EMAIL</h2></ion-col>
+      <ion-col><h2>ROL</h2></ion-col>
+      <ion-col><h2>ACCIONES</h2></ion-col>
+    </ion-row>
+    <!-- Filas de la tabla generadas dinámicamente -->
+    <ion-row *ngFor="let inspector of inspectores" class="table-row">
+      <ion-col>{{ inspector.iduser }}</ion-col>
+      <ion-col>{{ inspector.nombre }}</ion-col>
+      <ion-col>{{ inspector.apellido }}</ion-col>
+      <ion-col>{{ inspector.cedula }}</ion-col>
+      <ion-col>{{ inspector.email }}</ion-col>
+      <ion-col>{{ inspector.rol }}</ion-col>
+      <ion-col class="action-buttons">
+        <ion-button color="warning" (click)="editInspector(inspector)">EDITAR</ion-button>
+        <ion-button color="danger" (click)="deleteInspector(inspector.iduser)">ELIMINAR</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+  <!-- Botón fuera de la tabla -->
+<!--boton flotante-->
+<ion-fab  slot="fixed" vertical="bottom" horizontal="end" (click)="addInspector()" class="tooltip-container">
+  <ion-fab-button>  <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+    <span class="tooltip-text">Click para Registrar un nuevo Inspector</span>
+</ion-fab>
