@@ -21,6 +21,7 @@
           <ion-card-content>
             <ion-row>
               <ion-col>
+                  <ion-card-subtitle><h3><strong> Estado: </strong> {{esquela.estado_esquela}} <br></h3></ion-card-subtitle>
                   <ion-card-title><strong> Estudiante: </strong>{{ esquela.estudiante.NombreEst }} {{esquela.estudiante.ApellidoEst}}<br></ion-card-title>
                   <!-- Poner el nombre del docente o asignatura-->
                   <div  *ngIf="esquela.detailsVisible">
