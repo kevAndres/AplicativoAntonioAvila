@@ -35,7 +35,7 @@
 
             <ion-item>
               <ion-label position="floating"> Curso</ion-label>
-              <ion-select formControlName="curso_idCurso" aria-label="Cursos" interface="popover" placeholder="Seleciona el Curso" (ionChange)="GetDataAsignaturaCurso($event)">
+              <ion-select formControlName="curso_idCurso" aria-label="Cursos" label-placement="floating"  label="Seleciona el Curso" (ionChange)="GetDataAsignaturaCurso($event)">
                 <ion-select-option *ngFor="let curso of cursos" [value]="curso.idCurso">
                   {{ curso.idCurso }} {{curso.especialidad}}
                 </ion-select-option>
@@ -46,7 +46,7 @@
             <ion-item>
               <ion-label position="floating">Estudiante </ion-label>
 
-              <ion-select formControlName="EstudianteCurso" aria-label="Estudiantes" interface="popover" placeholder="Selecciona el Estudiante" (ionChange)="GetDataIdEstudiante($event.detail.value)">
+              <ion-select formControlName="EstudianteCurso" aria-label="Estudiantes" label-placement="floating" label="Selecciona el Estudiante" (ionChange)="GetDataIdEstudiante($event.detail.value)">
                 <ion-select-option *ngFor="let Estudiante of Estudiantes" [value]="Estudiante">
                   {{ Estudiante.NombreEst }} {{ Estudiante.ApellidoEst }}
                 </ion-select-option>

@@ -36,14 +36,15 @@
           <ion-card-subtitle>Ingrese sus datos</ion-card-subtitle>
           <form [formGroup]="formularioAsignatura" (ngSubmit)="RegisterAsignatura()">
             <ion-item>
-              <ion-select formControlName="asignatura_idasignatura" aria-label="Cursos" interface="popover" placeholder="Seleciona la Asignatura" >
+              <ion-select formControlName="asignatura_idasignatura" aria-label="Cursos"  label-placement="floating" label="Seleciona la Asignatura" >
                 <ion-select-option *ngFor="let asignatura of asignaturas" [value]="asignatura.idasignatura">
                   {{ asignatura.idasignatura }}
                 </ion-select-option>
               </ion-select>
             </ion-item>
+            
             <ion-item>
-              <ion-select formControlName="curso_idCurso"  aria-label="Cursos" interface="popover" placeholder="Seleciona el Curso">
+              <ion-select formControlName="curso_idCurso"  aria-label="Cursos" label-placement="floating"  label="Seleciona el Curso">
                 <ion-select-option *ngFor="let curso of cursos" [value]="curso.idCurso ">
                   {{ curso.idCurso }} {{curso.especialidad}}
                 </ion-select-option>
