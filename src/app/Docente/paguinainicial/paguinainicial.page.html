@@ -11,7 +11,7 @@
         <ion-menu-toggle auto-hide="false">
 
           <ion-item routerLink="/paguinainicial">
-            <ion-icon slot="start"  name="home-outline"></ion-icon>
+            <ion-icon slot="start" name="home-outline"></ion-icon>
             <ion-label>Inicio</ion-label>
           </ion-item>
           <ion-item routerLink="/registroasignatura">
@@ -55,7 +55,7 @@
   </ion-toolbar>
 </ion-header>
 <!--este es el cuerpo de la paguina-->
-<ion-content class="ion-padding">
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
       <ion-col size-md="4" *ngFor="let docente of asignaturasdocente">
@@ -75,14 +75,20 @@
             </ion-row>
             <ion-row>
               <ion-col>
-                <ion-button expand="block" routerLink="/esquela" (click)="GetDataAsignaturaCurso(docente)" class="custom-buttonregister">
-                  <ion-icon slot="start"  name="document-text-outline" ></ion-icon>
+                <ion-button expand="block" routerLink="/esquela"
+                  (click)="GetDataAsignaturaCurso(docente)"
+                  class="custom-buttonregister">
+                  <ion-icon slot="start"
+                    name="document-text-outline"></ion-icon>
                   REGISTRAR ESQUELAS
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button expand="block" routerLink="/vista-esquela-docente" (click)="GetDataAsignaturaCurso(docente)" class="custom-buttonregister">
-                  <ion-icon slot="start" name="document-text-outline"></ion-icon> INFO ESQUELAS
+                <ion-button expand="block" routerLink="/vista-esquela-docente"
+                  (click)="GetDataAsignaturaCurso(docente)"
+                  class="custom-buttonregister">
+                  <ion-icon slot="start"
+                    name="document-text-outline"></ion-icon> INFO ESQUELAS
                 </ion-button>
               </ion-col>
             </ion-row>
@@ -93,8 +99,9 @@
   </ion-grid>
 </ion-content>
 <!--boton flotante-->
-<ion-fab  slot="fixed" vertical="bottom" horizontal="end" routerLink="/registroasignatura" class="tooltip-container">
-  <ion-fab-button>  <ion-icon name="add"></ion-icon>
+<ion-fab slot="fixed" vertical="bottom" horizontal="end"
+  routerLink="/registroasignatura" class="tooltip-container">
+  <ion-fab-button> <ion-icon name="add"></ion-icon>
   </ion-fab-button>
-    <span class="tooltip-text">Click para Registrar una nueva Asignatura</span>
+  <span class="tooltip-text">Click para Registrar una nueva Asignatura</span>
 </ion-fab>

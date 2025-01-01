@@ -35,7 +35,6 @@ export class AuthService {
     private alertController: AlertController
   ) {}
 
-
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: '¡UPS!',
@@ -45,10 +44,6 @@ export class AuthService {
 
     await alert.present();
   }
-
-
-
-
 
   // Método para login
   login(email: string, password: string): Observable<boolean> {
@@ -60,9 +55,13 @@ export class AuthService {
           console.log(localStorage.getItem('token'));
           const decodedToken: any = jwtDecode(response.token);
           if (decodedToken && decodedToken.idRol) {
-            localStorage.setItem('roles', decodedToken.user.rol); // Guarda el rol completo en localStorage
-            console.log(localStorage.getItem('roles'))
-            localStorage.setItem('rolePrefix', decodedToken.idRol.substring(0, 3)); // Guarda el prefijo del rol en localStorage
+            localStorage.setItem('roles', decodedToken.user.idRol); // Guarda el rol completo en localStorage
+            console.log(
+              'roles para autorizacion',
+              localStorage.getItem('roles')
+            );
+            localStorage.setItem('rolePrefix', decodedToken.idRol); // Guarda el prefijo del rol en localStorage
+            console.log(localStorage.getItem('rolePrefix'));
           }
           return true;
         } else {
@@ -72,9 +71,9 @@ export class AuthService {
       catchError((error) => {
         console.error('Error en el login', error);
         const mensajeError =
-        error.error && error.error.message
-          ? error.error.message
-          : 'Ocurrió un error al intentar iniciar sesión. Por favor, intenta de nuevo.';
+          error.error && error.error.message
+            ? error.error.message
+            : 'Ocurrió un error al intentar iniciar sesión. Por favor, intenta de nuevo.';
         this.presentAlert(mensajeError); // Aquí llamas a u función presentAlert con el mensaje de error
         return new Observable<boolean>((subscriber) => {
           subscriber.next(false);
@@ -92,7 +91,7 @@ export class AuthService {
   private getToken(): string {
     return localStorage.getItem('token') || '';
   }
-  
+
   private decodeToken(): JwtPayload | null {
     const token = this.getToken();
     try {
@@ -109,7 +108,7 @@ export class AuthService {
     }
   }
   getRoles(): string[] {
-    const roles = localStorage.getItem('roles');
+    const roles = localStorage.getItem('rolePrefix');
     return roles ? [roles] : [];
   }
   getRoleIdPrefix(): string {
@@ -117,9 +116,6 @@ export class AuthService {
     return rolePrefix ? rolePrefix : '';
   }
 
-
-
-  
   //metodo para registrar representantes
   registerRepresentante(data: {
     nombre: string;
@@ -127,14 +123,10 @@ export class AuthService {
     cedula: string;
     email: string;
     password: string;
-    rol: string;
+    rol_id: number;
   }): Observable<any> {
     return this.http.post(`${this.apiUrlregister}/user/register`, data);
   }
-
-
-
-
 
   //metodo para registrar docentes
   registerDocente(data: {
@@ -144,7 +136,7 @@ export class AuthService {
     email: string;
     //asignatura: string;
     password: string;
-    rol: string;
+    rol_id: number;
   }): Observable<any> {
     return this.http.post(`${this.apiUrlregister}/user/register`, data);
   }
@@ -244,7 +236,7 @@ export class AuthService {
     };
 
     return this.http.post(`${this.apiUrlregister}/atraso/register`, body).pipe(
-      catchError(error => {
+      catchError((error) => {
         console.error('Error al registrar atraso', error);
         return throwError(error);
       })
@@ -265,6 +257,4 @@ export class AuthService {
     // Aquí también podrías limpiar cualquier otro estado o almacenamiento local
     console.log('Todos los datos de usuario han sido borrados.');
   }
-
-  
 }

@@ -21,8 +21,6 @@ export class HomePage implements OnInit {
   loginForm: FormGroup;
   public TitleHeader: string;
 
-
-  
   constructor(
     private router: Router,
     private loadingController: LoadingController,
@@ -84,7 +82,7 @@ export class HomePage implements OnInit {
         },
         complete: () => {
           this.dismissLoading(); // Descarta el loading cuando la solicitud completa (ya sea éxito o error)
-        }
+        },
       });
     }
   }
@@ -93,18 +91,18 @@ export class HomePage implements OnInit {
     // Aquí puedes mantener la lógica para redirigir al usuario según su rol
     const idRolPrefix = this.authService.getRoleIdPrefix();
     switch (idRolPrefix) {
-      case 'REP':
+      case 'REPRESENTANTE':
         this.router.navigate(['/paguinaprincipalrepresentante']);
         break;
-      case 'LIC':
+      case 'DOCENTE':
         this.router.navigate(['/paguinainicial']);
         break;
-      case 'INS':
+      case 'INSPECTOR':
         this.router.navigate(['/tabs/atrasos']);
         break;
-        case 'ADM':
-          this.router.navigate(['/inicioadmin/configuracion']);
-          break;
+      case 'ADMIN':
+        this.router.navigate(['/inicioadmin/configuracion']);
+        break;
       default:
         this.router.navigate(['/home']); // Ruta por defecto o manejo de error
         break;

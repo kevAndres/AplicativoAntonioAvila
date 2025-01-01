@@ -27,105 +27,110 @@
 
 //estilo para centrar el logo de la institucion
 .image-center {
-    display: flex;
-    justify-content: center;
-  }
+  display: flex;
+  justify-content: center;
+}
 //estilos de los botones de registrar y volver atras
 .custom-buttonback {
-    --background: hsl(210, 4%, 28%);
-    --color: #6d9eff;
-    --border-radius: 20px;
-    --padding: 10px 20px;
-  }
-  .custom-buttonregister {
-    --background-color: blue;
-    //--color: white;
-    --border-radius: 20px;
-    --padding: 10px 20px;
-  }
+  --background: hsl(210, 4%, 28%);
+  --color: #6d9eff;
+  --border-radius: 20px;
+  --padding: 10px 20px;
+}
+.custom-buttonregister {
+  --background-color: blue;
+  //--color: white;
+  --border-radius: 20px;
+  --padding: 10px 20px;
+}
 
-  //estilo para la configuarion de inspector y admin
-  .custom-icon {
-    font-size: 2rem; /* Ajusta el tamaño del icono según sea necesario */
-    color: var(--ion-color-primary); /* Cambia el color del icono */
-    margin-right: 10px; /* Espacio entre el icono y la etiqueta */
-    transition: color 0.3s ease; /* Añade una transición suave al color */
-  }
-  
-  .custom-label {
-    font-size: 1.2rem; /* Ajusta el tamaño de la etiqueta según sea necesario */
-    //font-weight: bold; /* Haz que la etiqueta sea negrita */
-    color: var(--ion-color-dark); /* Cambia el color del texto */
-    transition: color 0.3s ease; /* Añade una transición suave al color */
-  }
-  
-  .interactive-item {
-    transition: background-color 0.3s ease; /* Añade una transición suave al fondo */
-    cursor: pointer; /* Cambia el cursor al pasar por el ítem */
-  }
-  
-  .interactive-item:hover {
-    background-color: var(--ion-color-light); /* Cambia el color de fondo al pasar el puntero */
-  }
-  
-  .interactive-item:hover .custom-icon {
-    color: var(--ion-color-secondary); /* Cambia el color del icono al pasar el puntero */
-  }
-  
-  .interactive-item:hover .custom-label {
-    color: var(--ion-color-secondary); /* Cambia el color de la etiqueta al pasar el puntero */
-  }
-  
-  //estilo para el boton flotante de registros
-  .tooltip-container {
-    //position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip-container .tooltip-text {
-    visibility: hidden;
-    width: 150px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 20px;
-    padding: 10px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 120%; /* Posición del tooltip */
-    left: 5%;
-    margin-left: -91px;
-    opacity: 0;
-    transition: opacity 0.3s;
+//estilo para la configuarion de inspector y admin
+.custom-icon {
+  font-size: 2rem; /* Ajusta el tamaño del icono según sea necesario */
+  color: var(--ion-color-primary); /* Cambia el color del icono */
+  margin-right: 10px; /* Espacio entre el icono y la etiqueta */
+  transition: color 0.3s ease; /* Añade una transición suave al color */
+}
 
-  }
-  
-  .tooltip-container .tooltip-text::after {
-    content: '';
-    position: absolute;
-    top: 100%; /* En la parte inferior del tooltip */
-    left: 50%;
-    margin-left: 20px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-  
-  .tooltip-container:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-  }
-  //barcode-scanning
-body.barcode-scannig-active{
+.custom-label {
+  font-size: 1.2rem; /* Ajusta el tamaño de la etiqueta según sea necesario */
+  //font-weight: bold; /* Haz que la etiqueta sea negrita */
+  color: var(--ion-color-dark); /* Cambia el color del texto */
+  transition: color 0.3s ease; /* Añade una transición suave al color */
+}
+
+.interactive-item {
+  transition: background-color 0.3s ease; /* Añade una transición suave al fondo */
+  cursor: pointer; /* Cambia el cursor al pasar por el ítem */
+}
+
+.interactive-item:hover {
+  background-color: var(
+    --ion-color-light
+  ); /* Cambia el color de fondo al pasar el puntero */
+}
+
+.interactive-item:hover .custom-icon {
+  color: var(
+    --ion-color-secondary
+  ); /* Cambia el color del icono al pasar el puntero */
+}
+
+.interactive-item:hover .custom-label {
+  color: var(
+    --ion-color-secondary
+  ); /* Cambia el color de la etiqueta al pasar el puntero */
+}
+
+//estilo para el boton flotante de registros
+.tooltip-container {
+  //position: relative;
+  display: inline-block;
+}
+
+.tooltip-container .tooltip-text {
+  visibility: hidden;
+  width: 150px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%; /* Posición del tooltip */
+  left: 5%;
+  margin-left: -91px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-container .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* En la parte inferior del tooltip */
+  left: 50%;
+  margin-left: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+//barcode-scanning
+body.barcode-scannig-active {
   visibility: hidden;
   --background: transparent;
   --ion-backgound-color: transparent;
 }
-.barcode-scanning-modal{
+.barcode-scanning-modal {
   visibility: visible;
 }
-@media (prefers-color-scheme:dark){
-  .barcode-scannig-active{
+@media (prefers-color-scheme: dark) {
+  .barcode-scannig-active {
     visibility: hidden;
     --background: transparent;
     --ion-backgound-color: transparent;
@@ -146,4 +151,85 @@ ion-content {
   height: 200px;
   border: 6px solid white;
   box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.3);
+}
+
+//Estilos para la paguina de login  y para el fondos de paguinas
+.welcome-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.welcome-subtitle {
+  color: var(--color-secondary);
+
+  text-align: center;
+}
+.ion-card-header {
+  box-shadow: 0px 0px 30px #333334e0;
+  border-radius: 15px;
+  padding: 20px;
+}
+//estilo para el fondo de la pagina
+@media (max-width: 600px) {
+  .ion-content-class {
+    border-radius: 0; /* Eliminar bordes en pantallas pequeñas */
+    box-shadow: none; /* Evitar sombras excesivas en móviles */
+  }
+  .ion-content-paguinas {
+    border-radius: 0; /* Eliminar bordes en pantallas pequeñas */
+    box-shadow: none; /* Evitar sombras excesivas en móviles */
+  }
+}
+
+.ion-content-class {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  background: linear-gradient(135deg, #3a3132, #0f4571, #386dbd, #3a3132);
+  // backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+.ion-content-paguinas {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  background: linear-gradient(135deg, #495575, #313d5c);
+  // backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+.button {
+  //--background-color: blue;
+  --color: white;
+  --border-radius: 20px;
+  --padding: 10px 20px;
+}
+
+//cabecera
+
+.ion-toolbar {
+  color: #ffffff; /* Color del texto */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil en el texto */
+}
+.ion-title {
+  font-size: 1.8rem; /* Tamaño del título */
+  font-weight: bold; /* Texto en negrita */
+  text-align: center; /* Alinear el título al centro */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+.ion-subtitle {
+  font-size: 1.2rem; /* Tamaño del subtítulo */
+  font-weight: bold; /* Texto en negrita */
+  text-align: left; /* Alinear el título al centro */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 0.3px; /* Espaciado entre letras */
 }

@@ -1,15 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-        <ion-back-button defaultHref="/paguinainicial"></ion-back-button>
+      <ion-back-button defaultHref="/paguinainicial"></ion-back-button>
 
     </ion-buttons>
     <ion-buttons>
       <ion-title>{{TitleHeader}}</ion-title>
-      <ion-button slot="end" shape="round" name="person-circle-outline"
-        ><ion-icon name="person-circle-outline"> </ion-icon> {{ username
-        }}</ion-button
-      >
+      <ion-button slot="end" shape="round"
+        name="person-circle-outline"><ion-icon name="person-circle-outline">
+        </ion-icon> {{ username
+        }}</ion-button>
     </ion-buttons>
     <ion-title> Docente</ion-title>
   </ion-toolbar>
@@ -21,47 +21,53 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
-        <ion-list>
-          <div class="image-center">
-            <img
-              src="assets/img/escudo(1).png"
-              alt="Escudao"
-              style="width: 100px; height: auto"
-            />
-          </div>
-          <ion-card-subtitle>Ingrese sus datos</ion-card-subtitle>
-          <form [formGroup]="formularioAsignatura" (ngSubmit)="RegisterAsignatura()">
-            <ion-item>
-              <ion-select formControlName="asignatura_idasignatura" aria-label="Cursos"  label-placement="floating" label="Seleciona la Asignatura" >
-                <ion-select-option *ngFor="let asignatura of asignaturas" [value]="asignatura.idasignatura">
-                  {{ asignatura.idasignatura }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            
-            <ion-item>
-              <ion-select formControlName="curso_idCurso"  aria-label="Cursos" label-placement="floating"  label="Seleciona el Curso">
-                <ion-select-option *ngFor="let curso of cursos" [value]="curso.idCurso ">
-                  {{ curso.idCurso }} {{curso.especialidad}}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            
-            
+        <ion-card class="ion-card-header">
+          <ion-list>
+            <div class="image-center">
+              <img
+                src="assets/img/escudo(1).png"
+                alt="Escudao"
+                style="width: 100px; height: auto" />
+            </div>
+            <ion-card-subtitle class="welcome-subtitle">Ingrese sus
+              datos</ion-card-subtitle>
+            <form [formGroup]="formularioAsignatura"
+              (ngSubmit)="RegisterAsignatura()">
+              <ion-item>
+                <ion-select formControlName="asignatura_idasignatura"
+                  aria-label="Cursos" label-placement="floating"
+                  label="Seleciona la Asignatura">
+                  <ion-select-option *ngFor="let asignatura of asignaturas"
+                    [value]="asignatura.idasignatura">
+                    {{ asignatura.idasignatura }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
 
-            <ion-button
-              type="submit"
-              expand="block"
-              [disabled]="!formularioAsignatura.valid"
-              class="custom-buttonregister"><ion-icon name="add-outline" class="custom-buttonregister"></ion-icon>Registrar</ion-button
-            >
-          </form>
+              <ion-item>
+                <ion-select formControlName="curso_idCurso" aria-label="Cursos"
+                  label-placement="floating" label="Seleciona el Curso">
+                  <ion-select-option *ngFor="let curso of cursos"
+                    [value]="curso.idCurso ">
+                    {{ curso.idCurso }} {{curso.especialidad}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
 
-        </ion-list>
+              <ion-button
+                type="submit"
+                expand="block"
+                [disabled]="!formularioAsignatura.valid"
+                class="custom-buttonregister"><ion-icon name="add-outline"
+                  class="custom-buttonregister"></ion-icon>Registrar</ion-button>
+            </form>
+
+          </ion-list>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,56 +1,66 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="/paguinainicial"></ion-back-button>
-  
-      </ion-buttons>
-      <ion-buttons>
-        <ion-title>UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO </ion-title>
-        <ion-button slot="end" shape="round" name="person-circle-outline"
-          ><ion-icon name="person-circle-outline"> </ion-icon> {{ username
-          }}</ion-button
-        >
-      </ion-buttons>
-      <ion-title> Docente</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/paguinainicial"></ion-back-button>
 
-  <ion-content class="ion-padding">
-    <ion-grid>
-      <ion-row>
-        <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4"> 
+    </ion-buttons>
+    <ion-buttons>
+      <ion-title>UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO </ion-title>
+      <ion-button slot="end" shape="round"
+        name="person-circle-outline"><ion-icon name="person-circle-outline">
+        </ion-icon> {{ username
+        }}</ion-button>
+    </ion-buttons>
+    <ion-title> Docente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-content-paguinas">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
+        <ion-card class="ion-card-header">
           <ion-list>
             <div class="image-center">
-              <img src="assets/img/escudo(1).png" alt="Escudao" style="width: 100px; height: auto;">
+              <img src="assets/img/escudo(1).png" alt="Escudao"
+                style="width: 100px; height: auto;">
             </div>
             <br>
-            <ion-label>
-              <h3>ESTUDIANTES 
-                
+            <ion-label class="welcome-subtitle">
+              <h3>ESTUDIANTES
+
               </h3>
             </ion-label>
-  
-            
+
             <ion-item>
               <ion-label position="floating">Seleccione un curso</ion-label>
-              <ion-select [(ngModel)]="selectedCursoId" (ionChange)="onCursoChange($event)">
-                <ion-select-option *ngFor="let asignatura of asignaturasdocente " [value]="asignatura" >{{ asignatura.asignatura_idasignatura}} {{asignatura.curso_idCurso}}</ion-select-option>
+              <ion-select [(ngModel)]="selectedCursoId"
+                (ionChange)="onCursoChange($event)">
+                <ion-select-option
+                  *ngFor="let asignatura of asignaturasdocente "
+                  [value]="asignatura">{{ asignatura.asignatura_idasignatura}}
+                  {{asignatura.curso_idCurso}}</ion-select-option>
               </ion-select>
             </ion-item>
-          
+
             <ion-item *ngIf="estudiantes.length > 0">
-              <ion-label position="floating">Seleccione el estudiante</ion-label>
+              <ion-label position="floating">Seleccione el
+                estudiante</ion-label>
               <ion-select [(ngModel)]="selectedEstudianteId">
-                <ion-select-option *ngFor="let estudiante of estudiantes" [value]="estudiante.idEstudiantes">{{ estudiante.NombreEst }} {{ estudiante.ApellidoEst }}</ion-select-option>
+                <ion-select-option *ngFor="let estudiante of estudiantes"
+                  [value]="estudiante.idEstudiantes">{{ estudiante.NombreEst }}
+                  {{
+                  estudiante.ApellidoEst }}</ion-select-option>
               </ion-select>
             </ion-item>
-       
-            <ion-button (click)="downloadFile()">DESCARGAR REPORTE <ion-icon name="document-text-outline"></ion-icon> </ion-button>
-           
-  
+
+            <ion-button (click)="downloadFile()">DESCARGAR REPORTE <ion-icon
+                name="document-text-outline"></ion-icon> </ion-button>
+
           </ion-list>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  
-  </ion-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

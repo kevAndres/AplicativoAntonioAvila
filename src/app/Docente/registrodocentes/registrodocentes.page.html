@@ -1,51 +1,64 @@
+<!-- Linea de -->
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" class="ion-toolbar">
+    <ion-title class="ion-title">{{TitleHeader}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{TitleHeader}}</ion-title>
   </ion-toolbar>
 </ion-header>
+<!-- Segunda linea de encabezado  -->
 
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registro de Docente</ion-title>
+    <ion-title class="ion-subtitle">Registro de Docente</ion-title>
   </ion-toolbar>
 </ion-header>
+<!-- Targeta de registro -->
 
-<ion-content class="ion-padding">
+<ion-content class="ion-content-class">
   <ion-grid>
     <ion-row>
-      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4"> 
-        <ion-list>
-          <div class="image-center">
-            <img src="assets/img/escudo(1).png" alt="Escudao" style="width: 100px; height: auto;">
-          </div>
-          <ion-card-subtitle>Ingrese sus datos</ion-card-subtitle>
-          <form [formGroup]="formularioDocente" (ngSubmit)="registrarDocente()">
-            <ion-item>
-              <ion-label position="floating">Nombres</ion-label>
-              <ion-input type="text" formControlName="nombre"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Apellidos</ion-label>
-              <ion-input type="text" formControlName="apellido"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Cédula</ion-label>
-              <ion-input type="text" formControlName="cedula"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Correo</ion-label>
-              <ion-input type="email" formControlName="email"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Contraseña</ion-label>
-              <ion-input type="password" formControlName="password"></ion-input>
-            </ion-item>
-            <ion-button type="submit" expand="block" [disabled]="!formularioDocente.valid" class="custom-buttonregister"> <ion-icon name="add-outline" ></ion-icon>Registrar</ion-button>
-          </form>
-        </ion-list>
+      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
+        <ion-card class="ion-card-header">
+          <ion-list>
+            <div class="image-center">
+              <img src="assets/img/escudo(1).png" alt="Escudao"
+                style="width: 100px; height: auto;">
+
+            </div>
+            <ion-card-subtitle class="welcome-subtitle">Ingrese sus
+              datos</ion-card-subtitle>
+            <form [formGroup]="formularioDocente"
+              (ngSubmit)="registrarDocente()">
+              <ion-item>
+                <ion-label position="floating">Nombres</ion-label>
+                <ion-input type="text" formControlName="nombre"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Apellidos</ion-label>
+                <ion-input type="text" formControlName="apellido"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Cédula</ion-label>
+                <ion-input type="text" formControlName="cedula"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Correo</ion-label>
+                <ion-input type="email" formControlName="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input type="password"
+                  formControlName="password"></ion-input>
+              </ion-item>
+              <ion-button type="submit" expand="block"
+                [disabled]="!formularioDocente.valid"
+                class="custom-buttonregister"> <ion-icon
+                  name="add-outline"></ion-icon>Registrar</ion-button>
+            </form>
+          </ion-list>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
