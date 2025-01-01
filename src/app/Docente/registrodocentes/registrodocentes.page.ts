@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { AlertController,LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { HeaderServiceService } from 'src/Shares/Services/header-service.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class RegistrodocentesPage {
     private alertController: AlertController,
     private loadingController: LoadingController,
     private HeaderServiceService: HeaderServiceService
-  ) {    
+  ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
     // Aquí inicializamos el FormGroup utilizando el FormBuilder
     this.formularioDocente = this.formBuilder.group({
@@ -30,12 +30,12 @@ export class RegistrodocentesPage {
       apellido: ['', [Validators.required, Validators.minLength(3)]],
       cedula: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], // Suponiendo cédula de 10 dígitos
       email: ['', [Validators.required, Validators.email]],
-     // asignatura: ['', [Validators.required]],
+      // asignatura: ['', [Validators.required]],
       //rol: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
-//metodo de alerta de error
+  //metodo de alerta de error
   async presentError(message: string) {
     const alert = await this.alertController.create({
       header: '¡UPS!',
@@ -54,7 +54,7 @@ export class RegistrodocentesPage {
     return loading;
   }
 
-//metodo de alerta de confirmacion de registro
+  //metodo de alerta de confirmacion de registro
   async presentConfirmacion(message: string) {
     const alert = await this.alertController.create({
       header: 'INFO',
@@ -75,14 +75,13 @@ export class RegistrodocentesPage {
         cedula: this.formularioDocente.value.cedula,
         email: this.formularioDocente.value.email,
         //asignatura: this.formularioDocente.value.password,
-        rol: 'docente',
+        rol_id: 3,
         password: this.formularioDocente.value.password,
       };
 
       // Llama al método register del servicio authService y pasa los datos
       this.authService.registerDocente(datosRegistro).subscribe({
         next: async (response) => {
-          
           console.log('Registro exitoso', response);
           await loading.dismiss();
           this.presentConfirmacion('Resgistro Exitoso');

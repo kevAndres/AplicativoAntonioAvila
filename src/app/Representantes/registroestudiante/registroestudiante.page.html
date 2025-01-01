@@ -43,8 +43,8 @@
             </ion-item>
             <ion-item>
               
-              <ion-select formControlName="curso_idCurso" aria-label="Cursos" interface="popover" placeholder="Seleciona el Curso">
-                <ion-select-option *ngFor="let curso of cursos" [value]="curso.idCurso">     {{ curso.idCurso }}             </ion-select-option>
+              <ion-select formControlName="curso_idCurso" aria-label="Cursos" label-placement="floating"  label="Seleciona el Curso">
+                <ion-select-option *ngFor="let curso of cursos" [value]="curso.idCurso">     {{ curso.idCurso }}   {{curso.especialidad}}          </ion-select-option>
               </ion-select>
             </ion-item>
 

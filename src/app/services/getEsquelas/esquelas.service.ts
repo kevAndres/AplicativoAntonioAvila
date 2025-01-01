@@ -18,4 +18,8 @@ export class EsquelasService {
   getEsquelasIdAsignacionDocenteMateria(): Observable<any> {
     return this.http.get(`${APIURL}/esquela/docenteAsignacion/${localStorage.getItem('MateriaDocente')}`);
   }
+   //metodo   que trae las esquelas con el nuevo estado de la esquela
+   getUpdateEsquelasIdEstudiante(): Observable<any> {
+    return this.http.put(`${APIURL}/esquela/cambiar-estado/${localStorage.getItem('IdEsquela')}`, {});
+  }
 }
