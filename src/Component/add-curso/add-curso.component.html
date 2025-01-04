@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Agregar Nivel Académico</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">CERRAR</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="form-container">
+
+  <ion-card class="form-card">
+    <ion-card-header class="welcome-subtitle">Ingrese los datos del
+      Curso</ion-card-header>
+    <ion-item>
+      <ion-label position="floating">Curso</ion-label>
+      <ion-input [(ngModel)]="curso.nivel_curso"
+        (keypress)="allowOnlyNumbers($event)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Paralelo</ion-label>
+      <ion-input [(ngModel)]="curso.paralelo_curso"
+        (ionInput)="convertToUppercase($event)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Selecciona la Especialidad</ion-label>
+      <ion-select [(ngModel)]="curso.especialidad_id">
+        <ion-select-option *ngFor="let especialidad of especialidades"
+          [value]="especialidad.especialidad_id">
+          {{ especialidad.especialidad_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Selecciona la Jornada</ion-label>
+      <ion-select [(ngModel)]="curso.jor_id">
+        <ion-select-option *ngFor="let jornada of jornadas"
+          [value]="jornada.jor_id">
+          {{ jornada.jor_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Selecciona el Nivel Academico</ion-label>
+      <ion-select [(ngModel)]="curso.nivel_id">
+        <ion-select-option *ngFor="let niveles of nivelAcademico"
+          [value]="niveles.nivel_id">
+          {{ niveles.nivel_descripcion }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-buttons class="button-group">
+      <ion-button class="cancel-button"
+        (click)="closeModal()">Cancelar</ion-button>
+      <ion-button class="save-button"
+        (click)="submitData()">Guardar</ion-button>
+    </ion-buttons>
+  </ion-card>
+</div>

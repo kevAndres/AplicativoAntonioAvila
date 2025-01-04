@@ -8,16 +8,15 @@ import { ModalController } from '@ionic/angular';
 import { VistaUsuarioComponent } from 'src/Component/VistaUsuario/vista-usuario/vista-usuario.component';
 import { HeaderServiceService } from 'src/Shares/Services/header-service.service';
 
-
 @Component({
   selector: 'app-paguinaprincipalrepresentante',
   templateUrl: './paguinaprincipalrepresentante.page.html',
   styleUrls: ['./paguinaprincipalrepresentante.page.scss'],
 })
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PaguinaprincipalrepresentantePage implements OnInit, OnDestroy {
+export class PaguinaprincipalrepresentantePage {
   representados: any[] = [];
   username: string = '';
   public TitleHeader: string;
@@ -31,35 +30,35 @@ export class PaguinaprincipalrepresentantePage implements OnInit, OnDestroy {
     private EstudiantesService: EstudiantesService,
     private modalController: ModalController,
     private HeaderServiceService: HeaderServiceService
-
   ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
   }
 
-  ngOnInit() {
-   // this.ChargeEstudents();
-  }
+  // ngOnInit() {
+  //   // this.ChargeEstudents();
+  // }
 
   ionViewDidEnter() {
     this.authService.AutentificatorLogin();
-    this.ChargeEstudents(); 
+    this.ChargeEstudents();
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.authService.AutentificatorLogin();
-    this.ChargeEstudents(); 
+    this.ChargeEstudents();
     this.menu.enable(true, 'first');
-
   }
-
-
 
   ChargeEstudents() {
     this.subscriptions.add(
       this.EstudiantesService.getRepresentados().subscribe(
-        data => {
+        (data) => {
           this.representados = data;
+          console.log(
+            'todso lso representados',
+            JSON.stringify(this.representados)
+          );
         },
-        error => {
+        (error) => {
           console.error('Error al cargar los representados', error);
         }
       )
@@ -76,31 +75,27 @@ export class PaguinaprincipalrepresentantePage implements OnInit, OnDestroy {
     this.router.navigate(['/registroestudiante']);
   }
 
-  ngOnDestroy() {
-   // this.subscriptions.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   // this.subscriptions.unsubscribe();
+  // }
 
   GetDataIdEstudiante(estudiante: any) {
     localStorage.setItem('IdEstCurForEsquelas', estudiante.idEstudiantes);
     localStorage.setItem('NombreEstudiante', estudiante.NombreEst);
     localStorage.setItem('ApellidoEstudiante', estudiante.ApellidoEst);
 
-
     console.log(localStorage.getItem('IdEstCurForEsquelas'));
     console.log(localStorage.getItem('NombreEstudiante'));
     console.log(localStorage.getItem('ApellidoEstudiante'));
-
-
   }
   logout() {
     this.authService.limpiarrepresentados();
     this.EstudiantesService.clearUserData();
   }
 
-
   async showUserInfo() {
     const modal = await this.modalController.create({
-      component: VistaUsuarioComponent
+      component: VistaUsuarioComponent,
     });
     return await modal.present();
   }

@@ -33,45 +33,71 @@
     </ion-buttons>
     <ion-buttons>
       <ion-title>{{TitleHeader}}</ion-title>
-      <ion-button slot="end" shape="round" name="person-circle-outline"><ion-icon name="person-circle-outline">
+      <ion-button slot="end" shape="round"
+        name="person-circle-outline"><ion-icon name="person-circle-outline">
         </ion-icon> {{ username
         }}</ion-button>
     </ion-buttons>
-    <ion-title > Representante</ion-title>
+    <ion-title> Representante</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
-      
+
       <ion-col size-md="4" *ngFor="let estudiante of representados">
         <ion-card>
           <ion-card-header>
             <ion-row>
-            <ion-col size="auto">
-              <ion-icon name="person-outline" class="icon-xl" button (click)="GetDataIdEstudiante(estudiante)" (click)="showUserInfo()"></ion-icon>
-            </ion-col>
-            <ion-col>
-                <ion-card-title>{{ estudiante.NombreEst }} {{ estudiante.ApellidoEst }}</ion-card-title>
-                <ion-card-subtitle>Cédula: {{ estudiante.cedula }}</ion-card-subtitle>
-                <ion-card-subtitle> Curso: {{ estudiante.curso_idCurso }} </ion-card-subtitle>
-            </ion-col>
-          </ion-row>
+              <ion-col size="auto">
+                <ion-icon name="person-outline" class="icon-xl" button
+                  (click)="GetDataIdEstudiante(estudiante)"
+                  (click)="showUserInfo()"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-card-title> {{estudiante.ApellidoEst }} {{
+                  estudiante.NombreEst
+                  }}</ion-card-title>
+                <ion-card-subtitle>Cédula: {{ estudiante.cedula
+                  }}</ion-card-subtitle>
+                <ion-card-subtitle>
+                  Curso: {{
+                  estudiante.curso.nivel_curso}} -
+                  "{{estudiante.curso.paralelo_curso}}"
+                </ion-card-subtitle>
+              </ion-col>
+              <ion-col>
+                <ion-card-subtitle> Nivel: {{
+                  estudiante.curso.nivel_academico.nivel_descripcion}}
+                </ion-card-subtitle>
+                <ion-card-subtitle> Especialidad: {{
+                  estudiante.curso.especialidad.especialidad_nombre}}
+                </ion-card-subtitle>
+                <ion-card-subtitle> Jornada: {{
+                  estudiante.curso.nivel_academico.jornada.jor_nombre}}
+                </ion-card-subtitle>
+              </ion-col>
+            </ion-row>
             <ion-row>
-              <ion-button expand="block" routerLink="/vista-esquela-representante" class="custom-buttonregister" (click)="GetDataIdEstudiante(estudiante)">
+              <ion-button expand="block"
+                routerLink="/vista-esquela-representante"
+                class="custom-buttonregister"
+                (click)="GetDataIdEstudiante(estudiante)">
                 VER ESQUELAS
                 <ion-icon slot="start" name="document-text-outline"></ion-icon>
               </ion-button>
-              <ion-button expand="block" routerLink="/vista-atrasos-representante" class="custom-buttonregister" (click)="GetDataIdEstudiante(estudiante)">
+              <ion-button expand="block"
+                routerLink="/vista-atrasos-representante"
+                class="custom-buttonregister"
+                (click)="GetDataIdEstudiante(estudiante)">
                 VER ATRASOS
-                <ion-icon slot="start" name="document-text-outline"></ion-icon> </ion-button></ion-row>
+                <ion-icon slot="start" name="document-text-outline"></ion-icon>
+              </ion-button></ion-row>
           </ion-card-header>
         </ion-card>
       </ion-col>
-      
+
     </ion-row>
   </ion-grid>
 </ion-content>
-
-

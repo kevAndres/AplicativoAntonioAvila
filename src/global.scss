@@ -233,3 +233,78 @@ ion-content {
   text-transform: uppercase; /* Texto en mayúsculas */
   letter-spacing: 0.3px; /* Espaciado entre letras */
 }
+.table-row {
+  border-bottom: 1px solid #ccc;
+  background-color: #b5d0e8de;
+  color: #000000;
+  padding: 10px;
+  text-align: center;
+}
+//Estilos para modal de niveles academicos
+/* Contenedor del formulario */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Altura de toda la pantalla */
+  padding: 16px;
+  box-sizing: border-box;
+  //background-color: #f9f9f9; /* Fondo opcional */
+}
+
+/* Tarjeta del formulario */
+.form-card {
+  width: 400px; /* Ancho fijo del formulario */
+  max-width: 90%; /* Para pantallas pequeñas */
+  padding: 20px;
+  border: 2px solid #ccc; /* Borde personalizado */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  //background-color: white; /* Fondo blanco */
+}
+
+/* Botones */
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Espacio entre los botones */
+  margin-top: 20px;
+}
+
+.cancel-button {
+  background-color: #f44336; /* Rojo para cancelar */
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+
+.cancel-button:hover {
+  background-color: #d32f2f; /* Color más oscuro al pasar el mouse */
+}
+
+.save-button {
+  background-color: #4caf50; /* Verde para guardar */
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+
+.save-button:hover {
+  background-color: #388e3c; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilo responsivo */
+@media (max-width: 600px) {
+  .form-card {
+    width: 100%; /* Aumenta el ancho en pantallas pequeñas */
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px; /* Espacio entre botones en pantallas pequeñas */
+  }
+
+  .cancel-button,
+  .save-button {
+    width: 100%; /* Botones ocupan todo el ancho */
+  }
+}

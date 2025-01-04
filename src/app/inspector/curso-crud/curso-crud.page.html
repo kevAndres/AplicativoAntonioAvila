@@ -7,30 +7,35 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen class="ion-content-paguinas">
   <ion-grid>
     <ion-row class="table-header">
-      <ion-col><H2>ID DEL CURSO</H2></ion-col>
-      <ion-col><H2>NIVEL</H2></ion-col>
-      <ion-col><H2>PARALELO</H2></ion-col>
-      <ion-col><H2>ESPECIALIDAD</H2></ion-col>
-      <ion-col><H2>ACCIONES</H2></ion-col>
+      <ion-col><h2>CURSO</h2></ion-col>
+      <ion-col><h2>PARALELO</h2></ion-col>
+      <ion-col><h2>ESPECIALIDAD</h2></ion-col>
+      <ion-col><h2>NIVEL ACADEMICO</h2></ion-col>
+      <ion-col><h2>JORNADA</h2></ion-col>
+      <ion-col><h2>ACCIONES</h2></ion-col>
     </ion-row>
     <ion-row *ngFor="let curso of cursos" class="table-row">
-      <ion-col>{{ curso.idCurso }}</ion-col>
-      <ion-col>{{ curso.curso }}</ion-col>
-      <ion-col>{{ curso.paralelo }}</ion-col>
-      <ion-col>{{ curso.especialidad }}</ion-col>
+      <ion-col>{{ curso.nivel_curso}}</ion-col>
+      <ion-col>{{ curso.paralelo_curso }}</ion-col>
+      <ion-col>{{ curso.especialidad.especialidad_nombre }}</ion-col>
+      <ion-col>{{ curso.nivel_academico.nivel_descripcion }}</ion-col>
+      <ion-col>{{ curso.nivel_academico.jornada.jor_nombre }}</ion-col>
       <ion-col class="action-buttons">
-        <ion-button color="warning" (click)="editCurso(curso)" >EDITAR</ion-button>
-        <ion-button color="danger" (click)="deleteCurso(curso.idCurso)">ELIMINAR</ion-button>
+        <!--<ion-button color="warning"
+          (click)="editCurso(curso)">EDITAR</ion-button>-->
+        <ion-button color="danger"
+          (click)="deleteCurso(curso.curso_id)">ELIMINAR</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 <!--boton flotante-->
-<ion-fab  slot="fixed" vertical="bottom" horizontal="end" (click)="addCurso()" class="tooltip-container">
-  <ion-fab-button>  <ion-icon name="add"></ion-icon>
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="addCurso()"
+  class="tooltip-container">
+  <ion-fab-button> <ion-icon name="add"></ion-icon>
   </ion-fab-button>
-    <span class="tooltip-text">Click para Registrar un nuevo Curso</span>
+  <span class="tooltip-text">Click para Registrar un nuevo Curso</span>
 </ion-fab>

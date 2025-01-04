@@ -12,7 +12,56 @@ interface JwtPayload {
     apellido?: string;
   };
 }
-
+interface JwtPayloadGetToken {
+  user?: {
+    iduser?: string;
+    nombre?: string;
+    apellido?: string;
+    cedula?: string;
+    email?: string;
+    password?: string;
+    rol_id?: number;
+  };
+  idRol?: string;
+}
+interface CursoGet {
+  nivel_curso: number;
+  paralelo_curso: string;
+  especialidad: {
+    especialidad_nombre: string;
+  };
+  nivel_academico: {
+    nivel_descripcion: string;
+  };
+  jornada: {
+    jor_nombre: string;
+  };
+}
+interface representadosGet {
+  idEstudiantes: number;
+  NombreEst: string;
+  ApellidoEst: string;
+  cedula: string;
+  idrepresentantes: number;
+  curso_id: string;
+  user: {
+    nombre: string;
+    apellido: string;
+  };
+  curso: {
+    nivel_curso: number;
+    paralelo_curso: string;
+    especialidad: {
+      especialidad_nombre: string;
+    };
+  };
+  nivel_academico: {
+    nivel_descripcion: string;
+    jornada: {
+      jor_nombre: string;
+    };
+  };
+}
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +77,10 @@ export class EstudiantesService {
     return localStorage.getItem('token') || '';
   }
 
-  private decodeToken(): JwtPayload | null {
+  private decodeToken(): JwtPayloadGetToken | null {
     const token = this.getToken();
     try {
-      return token ? jwtDecode<JwtPayload>(token) : null;
+      return token ? jwtDecode<JwtPayloadGetToken>(token) : null;
     } catch (error) {
       console.error('Error decoding token:', error);
       return null;
@@ -47,12 +96,12 @@ export class EstudiantesService {
     throw new Error('No token available or token is invalid');
   }
 
-  getRepresentados(): Observable<any> {
+  getRepresentados(): Observable<representadosGet[]> {
     const decodedToken = this.decodeToken();
     if (decodedToken && decodedToken.idRol) {
       return this.http
         .get<any>(
-          `${this.apiUrl}/estudiante/representante/${decodedToken.idRol}`
+          `${this.apiUrl}/estudiante/representante/${decodedToken.user?.iduser}`
         )
         .pipe(
           catchError((error) =>
@@ -88,8 +137,6 @@ export class EstudiantesService {
     }
   }
 
-  
-
   getAsignaturas(): Observable<any> {
     return this.http.get(`${this.apiUrl}/asignatura/all`);
   }
@@ -115,7 +162,7 @@ export class EstudiantesService {
       })
     );
   }
-//Metodo para registrar atraso desde el scaneo QR
+  //Metodo para registrar atraso desde el scaneo QR
   registrarAtraso(estudiantes_idEstudiantes: string): Observable<any> {
     const token = this.getToken();
     const body = { estudiantes_idEstudiantes, token };
@@ -126,8 +173,10 @@ export class EstudiantesService {
       })
     );
   }
-//Metodo para registrar atraso desde la busqueda por la cedula
-  registrarAtrasoFromCedula(estudiantes_idEstudiantes: string): Observable<any> {
+  //Metodo para registrar atraso desde la busqueda por la cedula
+  registrarAtrasoFromCedula(
+    estudiantes_idEstudiantes: string
+  ): Observable<any> {
     const token = this.getToken();
     const body = { estudiantes_idEstudiantes, token };
     return this.http.post(`${this.apiUrl}/atraso/register`, body).pipe(
@@ -139,17 +188,15 @@ export class EstudiantesService {
   }
 
   getIDESTfromCedula(cedula: string): Observable<any> {
-    return this.http.get<any>(
-      `${this.apiUrl}/estudiante/cedula/${cedula}`
-    ).pipe(
-      catchError(error => {
-        console.error('Error en la solicitud al servicio:', error);
-        return throwError(error);
-      })
-    );
+    return this.http
+      .get<any>(`${this.apiUrl}/estudiante/cedula/${cedula}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error en la solicitud al servicio:', error);
+          return throwError(error);
+        })
+      );
   }
-  
-  
 
   clearUserData(): void {
     // Resetear los BehaviorSubjects o cualquier otra variable de estado
@@ -160,7 +207,7 @@ export class EstudiantesService {
     localStorage.removeItem('Estudiante'); // Remueve el idEstudiante del localStorage
     console.log('Todos los datos de usuario han sido borrados.');
   }
- 
+
   getAtrasosByInspector(): Observable<any[]> {
     const decodedToken = this.decodeToken();
     if (decodedToken && decodedToken.idRol) {
@@ -180,7 +227,6 @@ export class EstudiantesService {
       );
     }
   }
-
 
   getEstudiantes(cursoId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/estudiante/curso/${cursoId}`);

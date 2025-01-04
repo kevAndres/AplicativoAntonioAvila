@@ -145,7 +145,7 @@ export class AuthService {
     NombreEst: string;
     ApellidoEst: string;
     cedula: string;
-    curso_idCurso: string;
+    curso_id: string;
   }): Observable<any> {
     const token = localStorage.getItem('token');
     if (!token) {
