@@ -9,10 +9,9 @@ import { EsquelasService } from '../../services/getEsquelas/esquelas.service';
   templateUrl: './vista-esquela-representante.page.html',
   styleUrls: ['./vista-esquela-representante.page.scss'],
 })
-export class VistaEsquelaRepresentantePage implements OnInit {
+export class VistaEsquelaRepresentantePage {
   username: string = '';
   esquelas: any[] = [];
-
 
   constructor(
     private EstudiantesService: EstudiantesService,
@@ -21,15 +20,15 @@ export class VistaEsquelaRepresentantePage implements OnInit {
     private esquelasService: EsquelasService
   ) {}
 
-  ngOnInit() {}
   ionViewDidEnter() {
     this.authService.AutentificatorLogin();
+    this.getEsquelas();
 
     this.UserName();
   }
   ionViewWillEnter() {
     this.authService.AutentificatorLogin();
-
+    this.getEsquelas();
     this.UserName();
     this.menu.enable(false, 'first');
   }

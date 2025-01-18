@@ -95,10 +95,25 @@ export interface CursoPost {
   nivel_id: number;
 }
 export interface Especialidad {
+  especialidad_id: number;
   especialidad_nombre: string;
 }
 export interface Jornada {
+  jor_id: number;
   jor_nombre: string;
+}
+export interface JornadaPatch {
+  jor_id: number;
+  jor_nombre: string;
+}
+export interface NivelAcademicoPost {
+  nivel_descripcion: string;
+  jor_id: number;
+}
+export interface NivelAcademicoPatch {
+  nivel_id: number;
+  nivel_descripcion: string;
+  jor_id: number;
 }
 export interface NivelAcademicoPost {
   nivel_descripcion: string;
@@ -172,7 +187,7 @@ export class InpectorServiceService {
     );
   }
   deleteDocente(iduser: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/docente/delete/${iduser}`);
+    return this.http.delete<void>(`${this.apiUrl}/user/delete/${iduser}`);
   }
   getAllDocentes(): Observable<any> {
     return this.http.get(`${this.apiUrl}/docente/maestro/all`);
@@ -243,15 +258,17 @@ export class InpectorServiceService {
   getEspecialidades(): Observable<Especialidad[]> {
     return this.http.get<Especialidad[]>(`${this.apiUrl}/especialidad/all`);
   }
-  // updateDocente(docente: Docente): Observable<Docente> {
-  //   return this.http.put<Docente>(
-  //     `${this.apiUrl}/docente/update/${docente.iduser}`,
-  //     docente
-  //   );
-  // }
-  // deleteDocente(iduser: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/docente/delete/${iduser}`);
-  // }
+  updateEspecialidad(data: Especialidad): Observable<Especialidad> {
+    return this.http.patch<Especialidad>(
+      `${this.apiUrl}/especialidad/patch/`,
+      data
+    );
+  }
+  deleteEspecialidad(especialidad_id: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/especialidad/delete/${especialidad_id}`
+    );
+  }
   // getAllDocentes(): Observable<any> {
   //   return this.http.get(`${this.apiUrl}/docente/maestro/all`);
   // }
@@ -262,15 +279,12 @@ export class InpectorServiceService {
   getJornadas(): Observable<Jornada[]> {
     return this.http.get<Jornada[]>(`${this.apiUrl}/jornada/all`);
   }
-  // updateDocente(docente: Docente): Observable<Docente> {
-  //   return this.http.put<Docente>(
-  //     `${this.apiUrl}/docente/update/${docente.iduser}`,
-  //     docente
-  //   );
-  // }
-  // deleteDocente(iduser: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/docente/delete/${iduser}`);
-  // }
+  updateJornada(data: Jornada): Observable<Jornada> {
+    return this.http.patch<Jornada>(`${this.apiUrl}/jornada/patch`, data);
+  }
+  deleteJornada(jor_id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/jornada/delete/${jor_id}`);
+  }
   // getAllDocentes(): Observable<any> {
   //   return this.http.get(`${this.apiUrl}/docente/maestro/all`);
   // }
@@ -289,15 +303,19 @@ export class InpectorServiceService {
       `${this.apiUrl}/nivel-academico/all`
     );
   }
-  // updateDocente(docente: Docente): Observable<Docente> {
-  //   return this.http.put<Docente>(
-  //     `${this.apiUrl}/docente/update/${docente.iduser}`,
-  //     docente
-  //   );
-  // }
-  // deleteDocente(iduser: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/docente/delete/${iduser}`);
-  // }
+  updateNivelAcademico(
+    data: NivelAcademicoPatch
+  ): Observable<NivelAcademicoPatch> {
+    return this.http.patch<NivelAcademicoPatch>(
+      `${this.apiUrl}/nivel-academico/patch/`,
+      data
+    );
+  }
+  deleteNivelAcademico(nivel_id: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/nivel-academico/delete/${nivel_id}`
+    );
+  }
   // getAllDocentes(): Observable<any> {
   //   return this.http.get(`${this.apiUrl}/docente/maestro/all`);
   // }

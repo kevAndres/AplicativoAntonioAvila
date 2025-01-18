@@ -4,51 +4,69 @@
       <ion-back-button defaultHref="/paguinainicial"></ion-back-button>
     </ion-buttons>
     <ion-title>Detalles de las Esquelas</ion-title>
-    <ion-button slot="end" shape="round" name="person-circle-outline"><ion-icon name="person-circle-outline"> </ion-icon> {{ username }}</ion-button>
+    <ion-button slot="end" shape="round" name="person-circle-outline"><ion-icon
+        name="person-circle-outline"> </ion-icon> {{ username }}</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
       <ion-col size-md="4" offset-md="4" size-lg="6" offset-lg="3">
-        <ion-card *ngFor="let esquela of esquelas" button (click)="toggleDetails(esquela)" >
-          <ion-card-header >
+        <ion-card *ngFor="let esquela of esquelas" button
+          (click)="toggleDetails(esquela)" class="ion-card-header">
+          <ion-card-header>
             <ion-toolbar color="primary" class="rounded-border">
-              <ion-label class="center-label"><img  src="assets/img/escudo(1).png" alt="Escudo" style="width: 30px; height: auto"/> UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO  </ion-label>
+              <ion-label class="center-label"><img
+                  src="assets/img/escudo(1).png" alt="Escudo"
+                  style="width: 30px; height: auto" /> UNIDAD EDUCATIVA ANTONIO
+                ÁVILA MALDONADO </ion-label>
             </ion-toolbar>
           </ion-card-header>
           <ion-card-content>
             <ion-row>
               <ion-col>
-                  <ion-card-subtitle><h3><strong> Estado: </strong> {{esquela.estado_esquela}} <br></h3></ion-card-subtitle>
-                  <ion-card-title><strong> Estudiante: </strong>{{ esquela.estudiante.NombreEst }} {{esquela.estudiante.ApellidoEst}}<br></ion-card-title>
-                  <!-- Poner el nombre del docente o asignatura-->
-                  <div  *ngIf="esquela.detailsVisible">
-                    <ion-card-title><strong> Motivo Seleccionado: </strong>{{esquela.Motivo}}<br>  </ion-card-title>
-                    <ion-card-title><strong>Descripcion de : </strong>{{ esquela.Descripcion }}<br></ion-card-title>
-                    <ion-card-title><strong>Docente Emisor : </strong>{{ username }}<br></ion-card-title>
-                    <!--<ion-card-title><strong>Asignatura : </strong>{{ esquela.asigDocenteMaterium.asignatura_idasignatura }}<br></ion-card-title>-->
-                    <ion-card-title><strong>Cita Programada : </strong>{{ esquela.cita }}<br></ion-card-title>
+                <ion-card-subtitle><h3><strong> Estado: </strong>
+                    {{esquela.estado_esquela}} <br></h3></ion-card-subtitle>
+                <ion-card-title><strong> Estudiante: </strong>{{
+                  esquela.estudiante.NombreEst }}
+                  {{esquela.estudiante.ApellidoEst}}<br></ion-card-title>
+                <!-- Poner el nombre del docente o asignatura-->
+                <div *ngIf="esquela.detailsVisible">
+                  <ion-card-title><strong> Motivo Seleccionado:
+                    </strong>{{esquela.motivo}}<br> </ion-card-title>
+                  <ion-card-title><strong>Descripcion de : </strong>{{
+                    esquela.descripcion }}<br></ion-card-title>
+                  <ion-card-title><strong>Docente Emisor : </strong>{{ username
+                    }}<br></ion-card-title>
+                  <!--<ion-card-title><strong>Asignatura : </strong>{{ esquela.asigDocenteMaterium.asignatura_idasignatura }}<br></ion-card-title>-->
+                  <ion-card-title><strong>Cita Programada : </strong>{{
+                    esquela.cita }}<br></ion-card-title>
 
-                  </div>
+                </div>
               </ion-col>
               <ion-col size="4">
-                <h5>Fecha de Envio: {{ esquela.Fecha }}</h5>
-                <h4>Curso: {{ esquela.estudiante.curso_idCurso }}</h4>
+                <h5>Fecha de Envio: {{ esquela.fecha }}</h5>
+                <h4>Curso: {{esquela.estudiante.curso.nivel_curso}} - '{{
+                  esquela.estudiante.curso.paralelo_curso }}'</h4>
 
               </ion-col>
             </ion-row>
           </ion-card-content>
           <ion-card-content *ngIf="esquela.detailsVisible">
             <ion-row>
-              <!-- ahi va para el evidencia-->
-              <ion-card-subtitle class="img-carnet"> Adjunta Evidencia
-              <ion-img [src]="esquela.Evidencia"  (click)="openFullscreenImage(esquela.Evidencia)"></ion-img></ion-card-subtitle>
+              <!-- Validar si evidencia está presente -->
+              <ion-card-subtitle class="img-carnet"
+                *ngIf="esquela.showEvidencia">
+                Adjunta Evidencia
+                <ion-img [src]="esquela.Evidencia"
+                  (click)="openFullscreenImage(esquela.Evidencia)"></ion-img>
+              </ion-card-subtitle>
             </ion-row>
           </ion-card-content>
+
         </ion-card>
-        
+
       </ion-col>
     </ion-row>
 

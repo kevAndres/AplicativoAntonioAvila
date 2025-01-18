@@ -12,7 +12,7 @@ import { HeaderServiceService } from 'src/Shares/Services/header-service.service
   templateUrl: './registroasignatura.page.html',
   styleUrls: ['./registroasignatura.page.scss'],
 })
-export class RegistroasignaturaPage implements OnInit {
+export class RegistroasignaturaPage {
   asignaturas: any[] = [];
   cursos: any[] = [];
   asignaturasdocente: any[] = [];
@@ -25,17 +25,15 @@ export class RegistroasignaturaPage implements OnInit {
     private EstudiantesService: EstudiantesService,
     private formBuilder: FormBuilder,
     private alertController: AlertController,
-    private AuthService : AuthService,
+    private AuthService: AuthService,
     private router: Router,
     private menu: MenuController,
     private HeaderServiceService: HeaderServiceService
-
-
   ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
     this.formularioAsignatura = this.formBuilder.group({
       asignatura_idasignatura: ['', [Validators.required]],
-      curso_idCurso: ['', [Validators.required]]
+      curso_idCurso: ['', [Validators.required]],
     });
   }
   async presentError(message: string) {
@@ -47,7 +45,7 @@ export class RegistroasignaturaPage implements OnInit {
 
     await alert.present();
   }
-  ngOnInit() {}
+  //ngOnInit() {}
   async presentConfirmacion(message: string) {
     const alert = await this.alertController.create({
       header: 'INFO',
@@ -63,7 +61,6 @@ export class RegistroasignaturaPage implements OnInit {
     await alert.present();
   }
 
-  
   ionViewDidEnter() {
     this.AuthService.AutentificatorLogin();
     this.UserName();
@@ -76,14 +73,12 @@ export class RegistroasignaturaPage implements OnInit {
     this.loadAsignaturas();
     this.loadCursos();
     this.menu.enable(false, 'first');
-
-  
   }
   loadAsignaturas() {
-    this.EstudiantesService.getAsignaturas().subscribe({
+    this.EstudiantesService.getAsignaturasPorNivelAcademicoJornada().subscribe({
       next: (data) => {
         this.asignaturas = data;
-        console.log(this.asignaturas);
+        console.log('asignatruas de la paguina del docente', this.asignaturas);
       },
       error: (error) => {
         console.error('Error al cargar las asignaturas', error);
@@ -91,46 +86,51 @@ export class RegistroasignaturaPage implements OnInit {
     });
   }
   loadCursos() {
-    this.EstudiantesService.getCursos().subscribe({
+    this.EstudiantesService.getCursosParams().subscribe({
       next: (data) => {
         this.cursos = data;
+        console.log('cursos', this.cursos);
       },
       error: (error) => {
         console.error('Error al cargar cursos', error);
       },
     });
   }
-  RegisterAsignatura(){
-if(this.formularioAsignatura.valid){
-  this.AuthService.registerAsignatura(this.formularioAsignatura.value).subscribe({
-    next:(Response) =>{
-      console.log(Response.message);
-      //this.presentConfirmacion(Response.message);
-      this.router.navigate(['/paguinainicial']);
-    },
-    error:(Error) =>{
-      console.error('Error en el registro', Error);
-      let mensajeError =
-        'Ocurrió un error al intentar registrar. Por favor, intenta de nuevo.';
-      if (Error.error && Error.error.message) {
-        mensajeError = Error.error.message;
-      }
-      this.presentError(mensajeError);
+  RegisterAsignatura() {
+    if (this.formularioAsignatura.valid) {
+      this.AuthService.registerAsignatura(
+        this.formularioAsignatura.value
+      ).subscribe({
+        next: (Response) => {
+          //console.log(Response.message);
+          //this.presentConfirmacion(Response.message);
+          this.router.navigate(['/paguinainicial']);
+        },
+        error: (Error) => {
+          console.error('Error en el registro', Error);
+          let mensajeError =
+            'Ocurrió un error al intentar registrar. Por favor, intenta de nuevo.';
+          if (Error.error && Error.error.message) {
+            mensajeError = Error.error.message;
+          }
+          this.presentError(mensajeError);
+        },
+      });
     }
-  })
-
-}
   }
 
-  ChargeAsignacionAignaturas(){
+  ChargeAsignacionAignaturas() {
     this.EstudiantesService.getAsignaturasDocente().subscribe(
-      data => {
+      (data) => {
         this.asignaturasdocente = data;
       },
-      Error => {
-        console.error('Error al cargar las asignaciones  de asignaturas del docente', Error)
+      (Error) => {
+        console.error(
+          'Error al cargar las asignaciones  de asignaturas del docente',
+          Error
+        );
       }
-    )
+    );
   }
   UserName() {
     try {
@@ -139,6 +139,4 @@ if(this.formularioAsignatura.valid){
       console.error(error);
     }
   }
-
-  
 }

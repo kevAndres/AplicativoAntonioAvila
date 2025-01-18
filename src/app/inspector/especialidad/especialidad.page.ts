@@ -22,7 +22,14 @@ export class EspecialidadPage implements OnInit {
   ngOnInit() {
     this.loadEspecialidades();
   }
-
+  async presentErrorAlert(message: any) {
+    const alert = await this.alertCtrl.create({
+      header: 'Error',
+      message: message ? message.error.message : 'Ups, algo salió mal',
+      buttons: ['Ok'],
+    });
+    await alert.present();
+  }
   async loadEspecialidades() {
     const loading = await this.loadingController.create({
       message: 'Cargando...',
@@ -56,7 +63,8 @@ export class EspecialidadPage implements OnInit {
           text: 'Add',
           handler: (data) => {
             const newDocente: Especialidad = {
-              especialidad_nombre: data.nombre,
+              especialidad_id: 0,
+              especialidad_nombre: data.nombre.toUpperCase(),
             };
             this.inspectorService.addEspecialidad(newDocente).subscribe(() => {
               this.loadEspecialidades();
@@ -66,5 +74,65 @@ export class EspecialidadPage implements OnInit {
       ],
     });
     await alert.present();
+  }
+  async editEspecialidad(especialidad_id: number, especialidad_nombre: string) {
+    try {
+      const alert = await this.alertCtrl.create({
+        header: 'Editar una Especialidad',
+        inputs: [
+          {
+            name: 'nombre',
+            type: 'text',
+            placeholder: 'Nombre de la especialidad',
+            value: especialidad_nombre.toUpperCase(),
+          },
+        ],
+        buttons: [
+          { text: 'Cancel', role: 'cancel' },
+          {
+            text: 'Edit',
+            handler: (data) => {
+              const especialidad: Especialidad = {
+                especialidad_id,
+                especialidad_nombre: data.nombre.toUpperCase(),
+              };
+              this.inspectorService
+                .updateEspecialidad(especialidad)
+                .subscribe(() => {
+                  this.loadEspecialidades();
+                });
+            },
+          },
+        ],
+      });
+      await alert.present();
+    } catch (error) {
+      this.presentErrorAlert(error);
+    }
+  }
+
+  async deleteEspecialidad(especialidad_id: number) {
+    try {
+      const alert = await this.alertCtrl.create({
+        header: 'Eliminar una Especialidad',
+        message: `¿Está seguro de eliminar la especialidad? `,
+        buttons: [
+          { text: 'Cancelar', role: 'cancelar' },
+          {
+            text: 'Eliminar',
+            handler: () => {
+              this.inspectorService
+                .deleteEspecialidad(especialidad_id)
+                .subscribe(() => {
+                  this.loadEspecialidades();
+                });
+            },
+          },
+        ],
+      });
+      await alert.present();
+    } catch (error) {
+      this.presentErrorAlert(error);
+    }
   }
 }

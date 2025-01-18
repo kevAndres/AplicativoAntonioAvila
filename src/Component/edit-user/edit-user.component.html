@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Editar Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">CERRAR</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div class="form-container">
+  <ion-card class="form-card">
+    <ion-card-header class="welcome-subtitle">
+      Edita los datos del Usuario
+    </ion-card-header>
+
+    <!-- Nombre del Usuario -->
+    <ion-item>
+      <ion-label position="floating">Nombre del Usuario</ion-label>
+      <ion-input [(ngModel)]="nivel.nombre"
+        (ionInput)="convertToUppercase($event)"></ion-input>
+    </ion-item>
+
+    <!-- Apellido del Usuario -->
+    <ion-item>
+      <ion-label position="floating">Apellido del Usuario</ion-label>
+      <ion-input [(ngModel)]="nivel.apellido"
+        (ionInput)="convertToUppercase($event)"></ion-input>
+    </ion-item>
+
+    <!-- Cedula del Usuario
+    <ion-item>
+      <ion-label position="floating">Cedula del Usuario</ion-label>
+      <ion-input [(ngModel)]="user.cedula"></ion-input>
+    </ion-item> -->
+
+    <!-- Email del Usuario -->
+    <ion-item>
+      <ion-label position="floating">Email del Usuario</ion-label>
+      <ion-input [(ngModel)]="nivel.email"></ion-input>
+    </ion-item>
+
+    <!-- Seleccionar Jornada -->
+    <ion-item>
+      <ion-label position="floating">Selecciona el Rol</ion-label>
+      <ion-select [(ngModel)]="nivel.rol_id">
+        <ion-select-option *ngFor="let rol of roles"
+          [value]="rol.rol_id">
+          {{ rol.rol_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Botones de acción -->
+    <ion-buttons class="button-group">
+      <ion-button class="cancel-button"
+        (click)="closeModal()">Cancelar</ion-button>
+      <ion-button class="save-button"
+        (click)="submitData()">Guardar</ion-button>
+    </ion-buttons>
+  </ion-card>
+</div>

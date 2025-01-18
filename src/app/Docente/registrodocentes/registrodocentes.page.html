@@ -48,6 +48,26 @@
                 <ion-input type="email" formControlName="email"></ion-input>
               </ion-item>
               <ion-item>
+                <ion-label position="floating">Nivel Academico</ion-label>
+                <ion-select formControlName="nivel_academico_nivel_id">
+                  <ion-select-option *ngFor="let niveles of nivelesAcademicos"
+                    [value]="niveles.nivel_id">
+                    {{ niveles.nivel_descripcion }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Jornada</ion-label>
+                <ion-select formControlName="jornada_jor_id">
+                  <ion-select-option *ngFor="let niveles of jornadas"
+                    [value]="niveles.jor_id">
+                    {{ niveles.jor_nombre }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
                 <ion-label position="floating">Contraseña</ion-label>
                 <ion-input type="password"
                   formControlName="password"></ion-input>

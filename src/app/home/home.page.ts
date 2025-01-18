@@ -62,28 +62,24 @@ export class HomePage implements OnInit {
       this.redirectBasedOnRole();
     }
   }
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.presentLoading();
-      this.authService.login(email, password).subscribe({
-        next: (success) => {
-          if (success) {
-            console.log('Inicio de sesión exitoso');
-            this.redirectBasedOnRole();
-          } else {
-            this.dismissLoading();
-            console.log('Inicio de sesión fallido');
-          }
-        },
-        error: (error) => {
-          this.dismissLoading();
-          console.error('Error en el inicio de sesión', error);
-        },
-        complete: () => {
-          this.dismissLoading(); // Descarta el loading cuando la solicitud completa (ya sea éxito o error)
-        },
-      });
+
+      try {
+        //await this.presentLoading();
+        const success = await this.authService.login(email, password);
+        if (success) {
+          console.log('Inicio de sesión exitoso');
+          this.redirectBasedOnRole();
+        } else {
+          console.log('Inicio de sesión fallido');
+        }
+      } catch (error) {
+        console.error('Error en el inicio de sesión:', error);
+      } finally {
+        this.dismissLoading(); // Siempre ocultar el loading al finalizar
+      }
     }
   }
 

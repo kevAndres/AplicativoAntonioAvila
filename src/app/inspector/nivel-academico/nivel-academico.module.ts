@@ -8,6 +8,7 @@ import { NivelAcademicoPageRoutingModule } from './nivel-academico-routing.modul
 
 import { NivelAcademicoPage } from './nivel-academico.page';
 import { RegistroNivelAcademicoComponent } from 'src/Component/regsitro-nivel-academico/regsitro-nivel-academico.component';
+import { EditNivelesAcademicosComponent } from 'src/Component/edit-niveles-academicos/edit-niveles-academicos.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,10 @@ import { RegistroNivelAcademicoComponent } from 'src/Component/regsitro-nivel-ac
     ReactiveFormsModule,
     NivelAcademicoPageRoutingModule,
   ],
-  declarations: [NivelAcademicoPage, RegistroNivelAcademicoComponent],
+  declarations: [
+    NivelAcademicoPage,
+    RegistroNivelAcademicoComponent,
+    EditNivelesAcademicosComponent,
+  ],
 })
 export class NivelAcademicoPageModule {}

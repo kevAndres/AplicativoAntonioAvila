@@ -25,4 +25,13 @@ export class RegistroNivelAcademicoComponent {
   submitData() {
     this.modalCtrl.dismiss(this.nivelAcademico);
   }
+  convertToUppercase(event: any): void {
+    const input = event.target.value;
+
+    // Convierte el valor a mayúsculas
+    event.target.value = input.toUpperCase();
+
+    // Si estás usando ngModel, actualiza el modelo manualmente
+    // this.curso.nivel_curso = event.target.value;
+  }
 }

@@ -1,4 +1,10 @@
-import {  Component,  OnInit,  ViewChild,  ElementRef,  ChangeDetectorRef,} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { EstudiantesService } from '../../services/getestudiantes/estudiantes.service';
 import { MenuController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,7 +23,7 @@ interface Estudiante {
   templateUrl: './esquela.page.html',
   styleUrls: ['./esquela.page.scss'],
 })
-export class EsquelaPage implements OnInit {
+export class EsquelaPage {
   @ViewChild('fileInput', { static: false })
   fileInput!: ElementRef<HTMLInputElement>;
   uploadMessage: string = '';
@@ -42,15 +48,13 @@ export class EsquelaPage implements OnInit {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private HeaderServiceService: HeaderServiceService
-
   ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
     this.formularioEsquela = this.formBuilder.group({
       EstudianteCurso: ['', [Validators.required]],
-      Motivo: ['', [Validators.required]],
+      motivo: ['', [Validators.required]],
       Descripcion: ['', [Validators.required, Validators.minLength(3)]],
-      cita: [''] // Agrega el control de la fecha aquí
-
+      cita: [''], // Agrega el control de la fecha aquí
     });
   }
   async presentLoading() {
@@ -87,7 +91,7 @@ export class EsquelaPage implements OnInit {
 
     await alert.present();
   }
-  ngOnInit() {}
+  //ngOnInit() {}
 
   ionViewDidEnter() {
     this.authService.AutentificatorLogin();
@@ -112,24 +116,23 @@ export class EsquelaPage implements OnInit {
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const seconds = String(now.getSeconds()).padStart(2, '0');
       const currentDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-      
+
       // Establecer el valor en el control de formulario
       this.formularioEsquela.get('cita')!.setValue(currentDate);
-      console.log('Valor de cita establecido a la fecha y hora actuales en América/Guayaquil:', currentDate);
+      console.log(
+        'Valor de cita establecido a la fecha y hora actuales en América/Guayaquil:',
+        currentDate
+      );
     }
     this.cdr.detectChanges(); // Forzar la detección de cambios
   }
-  
-  
-  
-  
 
   RegisterEsquela() {
     if (this.formularioEsquela.valid) {
       this.presentLoading();
 
       let citaFormateada = 'El docente emitente, no solicita cita';
-  
+
       if (this.showCalendar) {
         const citaValue = this.formularioEsquela.get('cita')!.value;
         if (citaValue) {
@@ -142,16 +145,16 @@ export class EsquelaPage implements OnInit {
           citaFormateada = `${day}/${month}/${year} ${hours}:${minutes}`;
         }
       }
-  
+
       const formData: any = {
-        Motivo: this.formularioEsquela.get('Motivo')!.value,
-        Descripcion: this.formularioEsquela.get('Descripcion')!.value,
+        motivo: this.formularioEsquela.get('motivo')!.value,
+        descripcion: this.formularioEsquela.get('Descripcion')!.value,
         Evidencia: this.base64Image,
-        cita: citaFormateada
+        cita: citaFormateada,
       };
-      
+
       console.log('Datos del formulario:', formData); // Para depurar
-  
+
       this.authService.registerEsquela_API(formData).subscribe({
         next: (response) => {
           console.log('Esquela registrada con éxito', response);
@@ -166,18 +169,13 @@ export class EsquelaPage implements OnInit {
         },
         complete: () => {
           this.dismissLoading(); // Descarta el loading cuando la solicitud completa (ya sea éxito o error)
-        }
+        },
       });
-    }
-     else {
+    } else {
       console.error('Datos no válidos');
       this.dismissLoading();
     }
-
   }
-  
-
-  
 
   loadEstudiantesCurso() {
     this.EstudiantesService.getEstudiantesCurso().subscribe({

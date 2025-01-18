@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Seleccionar Jornada para continuar con el inicio de
+      sesión</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <ion-radio-group (ionChange)="onJornadaSelected($event)">
+        <ion-item *ngFor="let jornada of jornadas">
+          <ion-label>{{ jornada.jornada.jor_nombre }}</ion-label>
+          <ion-radio slot="start" [value]="jornada"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+      (click)="confirmSelection()">Continuar</ion-button>
+  </ion-toolbar>
+</ion-footer>

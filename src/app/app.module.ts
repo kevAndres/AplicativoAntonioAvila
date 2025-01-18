@@ -8,6 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { JornadaSelectorModalComponent } from 'src/Component/jornada-selector-modal/jornada-selector-modal.component';
 
 @NgModule({
   declarations: [AppComponent],

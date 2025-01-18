@@ -11,19 +11,22 @@
   <ion-grid>
     <!-- Encabezados de la tabla -->
     <ion-row class="table-header">
-      <ion-col size="auto" offset-sm="2">NOMBRE</ion-col>
-      <ion-col>ACCIONES</ion-col>
+      <ion-col offset-sm="2">NOMBRE</ion-col>
+      <ion-col offset-sm="2">ACCIONES</ion-col>
     </ion-row>
     <!-- Filas de la tabla generadas dinámicamente -->
     <ion-row *ngFor="let jornada of jornadas" class="table-row">
-      <ion-col offset-sm="2" size="auto">{{ jornada.jor_nombre
+      <ion-col offset-sm="2">{{ jornada.jor_nombre
         }}</ion-col>
-      <ion-col class="action-buttons">
-        <!--    <ion-button color="warning"
- (click)="editDocente(docente)">EDITAR</ion-button> -->
-        <!--<ion-button color="danger"
-           (click)="deleteDocente(docente.iduser)">ELIMINAR</ion-button> -->
+      <ion-col offset-sm="2" class="action-buttons">
+        <ion-button color="warning"
+          (click)="editJornada(jornada.jor_id, jornada.jor_nombre)">
+          EDITAR
+        </ion-button>
+        <ion-button color="danger"
+          (click)="deleteJornada(jornada.jor_id)">ELIMINAR</ion-button>
       </ion-col>
+
     </ion-row>
   </ion-grid>
   <!-- Botón fuera de la tabla -->

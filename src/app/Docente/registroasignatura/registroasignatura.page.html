@@ -42,8 +42,8 @@
                   aria-label="Cursos" label-placement="floating"
                   label="Seleciona la Asignatura">
                   <ion-select-option *ngFor="let asignatura of asignaturas"
-                    [value]="asignatura.idasignatura">
-                    {{ asignatura.idasignatura }}
+                    [value]="asignatura.asig_id">
+                    {{ asignatura.asig_nombre }}
                   </ion-select-option>
                 </ion-select>
               </ion-item>
@@ -52,8 +52,9 @@
                 <ion-select formControlName="curso_idCurso" aria-label="Cursos"
                   label-placement="floating" label="Seleciona el Curso">
                   <ion-select-option *ngFor="let curso of cursos"
-                    [value]="curso.idCurso ">
-                    {{ curso.idCurso }} {{curso.especialidad}}
+                    [value]="curso.curso_id ">
+                    {{ curso.nivel_curso }} - "{{curso.paralelo_curso}}" -
+                    {{curso.especialidad.especialidad_nombre}}
                   </ion-select-option>
                 </ion-select>
               </ion-item>

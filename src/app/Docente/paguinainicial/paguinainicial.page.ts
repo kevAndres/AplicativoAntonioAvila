@@ -9,14 +9,14 @@ import { HeaderServiceService } from 'src/Shares/Services/header-service.service
 interface Docente {
   asignatura_idasignatura: string;
   curso_idCurso: string;
-  IdAsignacion:string;
+  IdAsignacion: string;
 }
 @Component({
   selector: 'app-paguinainicial',
   templateUrl: './paguinainicial.page.html',
   styleUrls: ['./paguinainicial.page.scss'],
 })
-export class PaguinainicialPage implements OnInit {
+export class PaguinainicialPage {
   public appPages = [
     { title: 'Inicio', url: '/home', icon: 'home' },
     { title: 'Acerca de', url: '/about', icon: 'information-circle' },
@@ -35,13 +35,11 @@ export class PaguinainicialPage implements OnInit {
     private EstudiantesService: EstudiantesService,
     private menu: MenuController,
     private HeaderServiceService: HeaderServiceService
-
   ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
-
   }
 
-  ngOnInit() {}
+  //ngOnInit() {}
   logout() {
     this.EstudiantesService.clearUserData();
     this.authService.limpiarrepresentados();
@@ -50,19 +48,18 @@ export class PaguinainicialPage implements OnInit {
     this.UserName();
     this.ChargeAsignacionAignaturas();
     this.authService.AutentificatorLogin();
-
   }
   ionViewWillEnter() {
     this.UserName();
     this.ChargeAsignacionAignaturas();
     this.menu.enable(true, 'first');
     this.authService.AutentificatorLogin();
-
   }
   ChargeAsignacionAignaturas() {
     this.EstudiantesService.getAsignaturasDocente().subscribe(
       (data) => {
         this.asignaturasdocente = data;
+        console.log('asignaturasdocente', this.asignaturasdocente);
       },
       (Error) => {
         console.error(

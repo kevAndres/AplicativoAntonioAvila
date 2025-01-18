@@ -1,5 +1,10 @@
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
-import {  FormBuilder,  FormGroup,  Validators,  AbstractControl,} from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { EstudiantesService } from '../../services/getestudiantes/estudiantes.service';
 import { MenuController, AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
@@ -24,15 +29,14 @@ export class AtrasosPage implements OnInit {
   Estudiantes: any[] = [];
   public TitleHeader: string;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private EstudiantesService: EstudiantesService,
     private menu: MenuController,
     private alertController: AlertController,
     private authService: AuthService,
-    private router: Router,    private HeaderServiceService: HeaderServiceService
-
+    private router: Router,
+    private HeaderServiceService: HeaderServiceService
   ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
     this.formularioatrasos = this.formBuilder.group({
@@ -122,6 +126,7 @@ export class AtrasosPage implements OnInit {
     this.EstudiantesService.getCursos().subscribe({
       next: (data) => {
         this.cursos = data;
+        console.log('cursos', this.cursos);
       },
       error: (error) => {
         console.error('Error al cargar cursos', error);

@@ -1,40 +1,57 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/paguinaprincipalrepresentante"></ion-back-button>
+      <ion-back-button
+        defaultHref="/paguinaprincipalrepresentante"></ion-back-button>
     </ion-buttons>
     <ion-title>Detalles de las Esquelas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
       <ion-col size-md="4" offset-md="4" size-lg="6" offset-lg="3">
-        <ion-card *ngFor="let esquela of esquelas" button (click)="toggleDetails(esquela)" >
-          <ion-card-header >
+        <ion-card *ngFor="let esquela of esquelas" button
+          (click)="toggleDetails(esquela)" class="ion-card-header">
+          <ion-card-header>
             <ion-toolbar color="primary" class="rounded-border">
-              <ion-label class="center-label"><img  src="assets/img/escudo(1).png" alt="Escudo" style="width: 30px; height: auto"/> UNIDAD EDUCATIVA ANTONIO ÁVILA MALDONADO  </ion-label>
+              <ion-label class="center-label"><img
+                  src="assets/img/escudo(1).png" alt="Escudo"
+                  style="width: 30px; height: auto" /> UNIDAD EDUCATIVA ANTONIO
+                ÁVILA MALDONADO </ion-label>
             </ion-toolbar>
           </ion-card-header>
           <ion-card-content>
             <ion-row>
               <ion-col>
-                  <ion-card-subtitle><h3><strong> Estado: </strong> {{esquela.estado_esquela}} <br></h3></ion-card-subtitle>
-                  <ion-card-title><strong> Motivo: </strong>{{ esquela.Motivo }}<br></ion-card-title>
-                  <!-- Poner el nombre del docente o asignatura-->
-                  <div  *ngIf="esquela.detailsVisible">
-                    <ion-card-title><strong> Se Notifica al Representante :</strong> {{username}} <br></ion-card-title>
-                    <ion-card-title> <strong > Del estudiante: </strong>{{Nombreestudiante}} {{Apellidosestudiante}} , por el motivo expuesto.<br>  </ion-card-title>
-                    <ion-card-title><strong>Dado que : </strong>{{ esquela.Descripcion }}<br></ion-card-title>
-                    <ion-card-title><strong>Eviado por : </strong>{{ esquela.docente.user.nombre }} {{ esquela.docente.user.apellido }}<br></ion-card-title>
-                    <ion-card-title><strong>Asignatura : </strong>{{ esquela.asigDocenteMaterium.asignatura_idasignatura }}<br></ion-card-title>
-                    <ion-card-title><strong>Por favor asistir a la Institucion Educativa la Fecha: </strong>{{ esquela.cita }}<br></ion-card-title>
+                <ion-card-subtitle><h3><strong> Estado: </strong>
+                    {{esquela.estado_esquela}} <br></h3></ion-card-subtitle>
+                <ion-card-title><strong> Motivo: </strong>{{ esquela.motivo
+                  }}<br></ion-card-title>
+                <!-- Poner el nombre del docente o asignatura-->
+                <div *ngIf="esquela.detailsVisible">
+                  <ion-card-title><strong> Se Notifica al Representante
+                      :</strong> {{username}} <br></ion-card-title>
+                  <ion-card-title> <strong> Del estudiante:
+                    </strong>{{Nombreestudiante}} {{Apellidosestudiante}} , por
+                    el motivo expuesto.<br> </ion-card-title>
+                  <ion-card-title><strong>Dado que : </strong>{{
+                    esquela.descripcion }}<br></ion-card-title>
+                  <ion-card-title><strong>Eviado por : </strong>{{
+                    esquela.docente.user.nombre }} {{
+                    esquela.docente.user.apellido }}<br></ion-card-title>
+                  <ion-card-title><strong>Asignatura : </strong>{{
+                    esquela.asigDocenteMaterium.asignatura.asig_nombre
+                    }}<br></ion-card-title>
+                  <ion-card-title><strong>Por favor asistir a la Institucion
+                      Educativa la Fecha: </strong>{{ esquela.cita
+                    }}<br></ion-card-title>
 
-                  </div>
+                </div>
               </ion-col>
               <ion-col size="4">
-                <h5>Fecha de Envio: {{ esquela.Fecha }}</h5>
+                <h5>Fecha de Envio: {{ esquela.fecha }}</h5>
               </ion-col>
             </ion-row>
           </ion-card-content>
@@ -42,11 +59,12 @@
             <ion-row>
               <!-- ahi va para el evidencia-->
               <ion-card-subtitle class="img-carnet"> Evidencia
-              <ion-img [src]="esquela.Evidencia"  (click)="openFullscreenImage(esquela.Evidencia)"></ion-img></ion-card-subtitle>
+                <ion-img [src]="esquela.Evidencia"
+                  (click)="openFullscreenImage(esquela.Evidencia)"></ion-img></ion-card-subtitle>
             </ion-row>
           </ion-card-content>
         </ion-card>
-        
+
       </ion-col>
     </ion-row>
 

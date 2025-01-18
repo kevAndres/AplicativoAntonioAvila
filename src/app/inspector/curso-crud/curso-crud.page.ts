@@ -104,7 +104,7 @@ export class CursoCRUDPage implements OnInit {
           nivel_curso: data.nivel_curso,
           especialidad_id: data.especialidad_id,
           jor_id: data.jor_id,
-          paralelo_curso: data.paralelo_curso,
+          paralelo_curso: data.paralelo_curso.toUpperCase(),
         };
         // Llamar al servicio para guardar el nivel académico
         this.inspectorService.addCurso(nuevoNivelAcademico).subscribe(() => {
@@ -140,9 +140,22 @@ export class CursoCRUDPage implements OnInit {
     await alert.present();
   }
   async deleteCurso(curso_id: number) {
-    await this.inspectorService.deleteCurso(curso_id).subscribe(() => {
-      this.loadCursos();
+    const alert = await this.alertCtrl.create({
+      header: 'Eliminar Curso',
+      message: '¿Estás seguro de eliminar este Curso?',
+      buttons: [
+        { text: 'Cancel', role: 'cancel' },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            this.inspectorService.deleteCurso(curso_id).subscribe(() => {
+              this.loadCursos();
+            });
+          },
+        },
+      ],
     });
+    await alert.present();
   }
 
   async loadJornadas(): Promise<any[]> {

@@ -20,12 +20,13 @@
       <ion-col offset-sm="2">{{
         nivelAcademico.nivel_descripcion}}</ion-col>
       <ion-col offset-sm="2">{{
-        nivelAcademico.jornada.jor_nombre}}</ion-col>
-      <ion-col class="action-buttons" offset-sm="2">
-        <!--    <ion-button color="warning"
- (click)="editDocente(docente)">EDITAR</ion-button> -->
-        <!--<ion-button color="danger"
-           (click)="deleteDocente(docente.iduser)">ELIMINAR</ion-button> -->
+        nivelAcademico.jornada.jor_nombre}}
+      </ion-col>
+      <ion-col class="action-buttons">
+        <ion-button color="warning"
+          (click)="editNivelAcademico(nivelAcademico.nivel_id)">EDITAR</ion-button>
+        <ion-button color="danger"
+          (click)="deleteNivelAcademico(nivelAcademico.nivel_id)">ELIMINAR</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

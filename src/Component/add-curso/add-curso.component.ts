@@ -38,13 +38,28 @@ export class AddCursoComponent {
       event.preventDefault(); // Bloquea cualquier entrada que no sea un número
     }
   }
+  //Metodo para obligar que sea solo mayusculas
+  // convertToUppercase(event: any): void {
+  //   const input = event.target.value;
+
+  //   // Convierte el valor a mayúsculas
+  //   event.target.value = input.toUpperCase();
+
+  //   // Si estás usando ngModel, actualiza el modelo manualmente
+  //   //this.curso.nivel_curso = event.target.value;
+  // }
   convertToUppercase(event: any): void {
     const input = event.target.value;
 
-    // Convierte el valor a mayúsculas
-    event.target.value = input.toUpperCase();
+    // Permitir solo letras (mayúsculas o minúsculas) y convertir a mayúsculas
+    if (/^[a-zA-Z]$/.test(input)) {
+      event.target.value = input.toUpperCase();
+    } else {
+      // Si el valor no es válido, lo limpiamos
+      event.target.value = '';
+    }
 
     // Si estás usando ngModel, actualiza el modelo manualmente
-    //this.curso.nivel_curso = event.target.value;
+    // this.curso.nivel_curso = event.target.value;
   }
 }
