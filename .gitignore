@@ -72,3 +72,6 @@ Thumbs.db
 
 #UrlApi
 src/Shares/UrlApi.ts
+
+
+.env
