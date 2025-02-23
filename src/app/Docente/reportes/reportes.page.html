@@ -38,8 +38,8 @@
                 (ionChange)="onCursoChange($event)">
                 <ion-select-option
                   *ngFor="let asignatura of asignaturasdocente "
-                  [value]="asignatura">{{ asignatura.asignatura_idasignatura}}
-                  {{asignatura.curso_idCurso}}</ion-select-option>
+                  [value]="asignatura">{{ asignatura.curso.nivel_curso }}
+                  {{asignatura.curso.paralelo_curso}}</ion-select-option>
               </ion-select>
             </ion-item>
 

@@ -26,10 +26,13 @@ export class EsquelasService {
     );
   }
   //metodo   que trae las esquelas con el nuevo estado de la esquela
-  getUpdateEsquelasIdEstudiante(): Observable<any> {
+  getUpdateEsquelasIdEstudiante(IdEsquela: number): Observable<any> {
     return this.http.put(
-      `${APIURL}/esquela/cambiar-estado/${localStorage.getItem('IdEsquela')}`,
+      //`${APIURL}/esquela/cambiar-estado/${localStorage.getItem('IdEsquela')}`,
+      `${APIURL}/esquela/cambiar-estado/${IdEsquela}`,
       {}
     );
+    // console.log('request', request.subscribe);
+    // return request;
   }
 }
