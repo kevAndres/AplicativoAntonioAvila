@@ -7,14 +7,13 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./reporte-xfecha.page.scss'],
 })
 export class ReporteXfechaPage implements OnInit {
-  url: string = APIURL
-  selectedDate : string="";
-  formattedDate: string="";
-  constructor(private loadingController: LoadingController) { }
+  url: string = APIURL;
+  selectedDate: string = '';
+  formattedDate: string = '';
+  constructor(private loadingController: LoadingController) {}
 
   ngOnInit() {
     this.selectedDate = new Date().toISOString();
-  
   }
 
   async downloadFile(): Promise<void> {
@@ -29,7 +28,7 @@ export class ReporteXfechaPage implements OnInit {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
     this.formattedDate = `${year}-${month}-${day}`;
-    console.log(this.formattedDate);
+    // console.log(this.formattedDate);
 
     if (this.formattedDate) {
       const downloadUrl = `${this.url}/atraso/reporte/fecha/${this.formattedDate}`;
@@ -55,7 +54,7 @@ export class ReporteXfechaPage implements OnInit {
         loading.dismiss();
       }
     } else {
-      console.log('Please select a date before downloading.');
+      // console.log('Please select a date before downloading.');
       loading.dismiss();
     }
   }

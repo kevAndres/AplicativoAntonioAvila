@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
@@ -12,7 +12,56 @@ interface JwtPayload {
     apellido?: string;
   };
 }
-
+interface JwtPayloadGetToken {
+  user?: {
+    iduser?: string;
+    nombre?: string;
+    apellido?: string;
+    cedula?: string;
+    email?: string;
+    password?: string;
+    rol_id?: number;
+  };
+  idRol?: string;
+}
+interface CursoGet {
+  nivel_curso: number;
+  paralelo_curso: string;
+  especialidad: {
+    especialidad_nombre: string;
+  };
+  nivel_academico: {
+    nivel_descripcion: string;
+  };
+  jornada: {
+    jor_nombre: string;
+  };
+}
+interface representadosGet {
+  idEstudiantes: number;
+  NombreEst: string;
+  ApellidoEst: string;
+  cedula: string;
+  idrepresentantes: number;
+  curso_id: string;
+  user: {
+    nombre: string;
+    apellido: string;
+  };
+  curso: {
+    nivel_curso: number;
+    paralelo_curso: string;
+    especialidad: {
+      especialidad_nombre: string;
+    };
+  };
+  nivel_academico: {
+    nivel_descripcion: string;
+    jornada: {
+      jor_nombre: string;
+    };
+  };
+}
 
 @Injectable({
   providedIn: 'root',
@@ -25,13 +74,14 @@ export class EstudiantesService {
   constructor(private http: HttpClient) {}
 
   private getToken(): string {
+    //console.log('token', localStorage.getItem('token'));
     return localStorage.getItem('token') || '';
   }
 
-  private decodeToken(): JwtPayload | null {
+  private decodeToken(): any | null {
     const token = this.getToken();
     try {
-      return token ? jwtDecode<JwtPayload>(token) : null;
+      return token ? jwtDecode<any>(token) : null;
     } catch (error) {
       console.error('Error decoding token:', error);
       return null;
@@ -47,12 +97,12 @@ export class EstudiantesService {
     throw new Error('No token available or token is invalid');
   }
 
-  getRepresentados(): Observable<any> {
+  getRepresentados(): Observable<representadosGet[]> {
     const decodedToken = this.decodeToken();
     if (decodedToken && decodedToken.idRol) {
       return this.http
         .get<any>(
-          `${this.apiUrl}/estudiante/representante/${decodedToken.idRol}`
+          `${this.apiUrl}/estudiante/representante/${decodedToken.user?.iduser}`
         )
         .pipe(
           catchError((error) =>
@@ -70,9 +120,12 @@ export class EstudiantesService {
   }
   getAsignaturasDocente(): Observable<any[]> {
     const decodedToken = this.decodeToken();
-    if (decodedToken && decodedToken.idRol) {
+    // console.log('decodedToken', JSON.stringify(decodedToken));
+    if (decodedToken && decodedToken.docente.iddocente) {
       return this.http
-        .get<any>(`${this.apiUrl}/docenteMateria/docente/${decodedToken.idRol}`)
+        .get<any>(
+          `${this.apiUrl}/docenteMateria/docente/${decodedToken.docente.iddocente}`
+        )
         .pipe(
           catchError((error) =>
             throwError(
@@ -88,13 +141,28 @@ export class EstudiantesService {
     }
   }
 
-  
-
   getAsignaturas(): Observable<any> {
     return this.http.get(`${this.apiUrl}/asignatura/all`);
   }
+  getAsignaturasPorNivelAcademicoJornada(): Observable<any> {
+    const decodedToken: any = this.decodeToken();
+    //console.log('token desemciptado', JSON.stringify(decodedToken));
+    const params = {
+      jor_id: decodedToken.user.rol_id,
+      nivel_id: decodedToken.docente.jornada_jor_id,
+    };
+    //console.log('params', params);
+    return this.http.get(`${this.apiUrl}/asignatura/seccion`, { params });
+  }
   getCursos(): Observable<any> {
     return this.http.get(`${this.apiUrl}/curso/all`);
+  }
+  getCursosParams(): Observable<any> {
+    const decodedToken: any = this.decodeToken();
+    const params = {
+      nivel_id: decodedToken.docente.nivel_academico_nivel_id,
+    };
+    return this.http.get(`${this.apiUrl}/curso/all/`, { params });
   }
   getEstudiantesCurso(): Observable<any[]> {
     return this.http.get<any>(
@@ -115,7 +183,7 @@ export class EstudiantesService {
       })
     );
   }
-//Metodo para registrar atraso desde el scaneo QR
+  //Metodo para registrar atraso desde el scaneo QR
   registrarAtraso(estudiantes_idEstudiantes: string): Observable<any> {
     const token = this.getToken();
     const body = { estudiantes_idEstudiantes, token };
@@ -126,8 +194,10 @@ export class EstudiantesService {
       })
     );
   }
-//Metodo para registrar atraso desde la busqueda por la cedula
-  registrarAtrasoFromCedula(estudiantes_idEstudiantes: string): Observable<any> {
+  //Metodo para registrar atraso desde la busqueda por la cedula
+  registrarAtrasoFromCedula(
+    estudiantes_idEstudiantes: string
+  ): Observable<any> {
     const token = this.getToken();
     const body = { estudiantes_idEstudiantes, token };
     return this.http.post(`${this.apiUrl}/atraso/register`, body).pipe(
@@ -139,17 +209,15 @@ export class EstudiantesService {
   }
 
   getIDESTfromCedula(cedula: string): Observable<any> {
-    return this.http.get<any>(
-      `${this.apiUrl}/estudiante/cedula/${cedula}`
-    ).pipe(
-      catchError(error => {
-        console.error('Error en la solicitud al servicio:', error);
-        return throwError(error);
-      })
-    );
+    return this.http
+      .get<any>(`${this.apiUrl}/estudiante/cedula/${cedula}`)
+      .pipe(
+        catchError((error) => {
+          console.error('Error en la solicitud al servicio:', error);
+          return throwError(error);
+        })
+      );
   }
-  
-  
 
   clearUserData(): void {
     // Resetear los BehaviorSubjects o cualquier otra variable de estado
@@ -158,9 +226,9 @@ export class EstudiantesService {
     localStorage.removeItem('curso'); // Remueve el curso del localStorage
     localStorage.removeItem('asignatura'); // Remueve la asignatura del localStorage
     localStorage.removeItem('Estudiante'); // Remueve el idEstudiante del localStorage
-    console.log('Todos los datos de usuario han sido borrados.');
+    //console.log('Todos los datos de usuario han sido borrados.');
   }
- 
+
   getAtrasosByInspector(): Observable<any[]> {
     const decodedToken = this.decodeToken();
     if (decodedToken && decodedToken.idRol) {
@@ -180,7 +248,6 @@ export class EstudiantesService {
       );
     }
   }
-
 
   getEstudiantes(cursoId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/estudiante/curso/${cursoId}`);

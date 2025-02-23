@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Editar Nivel Académico</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">CERRAR</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div class="form-container">
+  <ion-card class="form-card">
+    <ion-card-header class="welcome-subtitle">
+      Edita los datos del Nivel Académico
+    </ion-card-header>
+
+    <!-- Nombre de la Nivel Académico -->
+    <ion-item>
+      <ion-label position="floating">Nombre del Nivel Académico</ion-label>
+      <ion-input [(ngModel)]="nivel.nivel_descripcion"
+        (ionInput)="convertToUppercase($event)"></ion-input>
+    </ion-item>
+
+    <!-- Seleccionar Jornada -->
+    <ion-item>
+      <ion-label position="floating">Selecciona la Jornada</ion-label>
+      <ion-select [(ngModel)]="nivel.jor_id">
+        <ion-select-option *ngFor="let jornada of jornadas"
+          [value]="jornada.jor_id">
+          {{ jornada.jor_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Botones de acción -->
+    <ion-buttons class="button-group">
+      <ion-button class="cancel-button"
+        (click)="closeModal()">Cancelar</ion-button>
+      <ion-button class="save-button"
+        (click)="submitData()">Guardar</ion-button>
+    </ion-buttons>
+  </ion-card>
+</div>

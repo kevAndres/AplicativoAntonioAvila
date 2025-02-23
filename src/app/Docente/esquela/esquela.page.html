@@ -5,10 +5,10 @@
     </ion-buttons>
     <ion-buttons>
       <ion-title>{{TitleHeader}}</ion-title>
-      <ion-button slot="end" shape="round" name="person-circle-outline"
-        ><ion-icon name="person-circle-outline"> </ion-icon> {{ username
-        }}</ion-button
-      >
+      <ion-button slot="end" shape="round"
+        name="person-circle-outline"><ion-icon name="person-circle-outline">
+        </ion-icon> {{ username
+        }}</ion-button>
     </ion-buttons>
     <ion-title> Docente</ion-title>
   </ion-toolbar>
@@ -20,69 +20,83 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content class="ion-padding">
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
-        <ion-list>
-          <div class="image-center">
-            <img  src="assets/img/escudo(1).png"  alt="Escudao" style="width: 100px; height: auto"/>
-          </div>
-          <ion-card-subtitle>Rellene los campos de la Esquela</ion-card-subtitle>
-          <form [formGroup]="formularioEsquela" (ngSubmit)="RegisterEsquela()">
+        <ion-card class="ion-card-header">
+          <ion-list>
+            <div class="image-center">
+              <img src="assets/img/escudo(1).png" alt="Escudao"
+                style="width: 100px; height: auto" />
+            </div>
+            <ion-card-subtitle class="welcome-subtitle">Ingrese los datos de la
+              Esquela</ion-card-subtitle>
+            <form [formGroup]="formularioEsquela"
+              (ngSubmit)="RegisterEsquela()">
 
-            <ion-item>
-              <ion-select formControlName="EstudianteCurso" aria-label="Estudiantes" interface="popover" placeholder="Selecciona el Estudiante" (ionChange)="GetDataIdEstudiante($event.detail.value)">
-                <ion-select-option *ngFor="let Estudiante of Estudiantes" [value]="Estudiante">
-                  {{ Estudiante.NombreEst }} {{ Estudiante.ApellidoEst }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            
+              <ion-item>
+                <ion-select formControlName="EstudianteCurso"
+                  aria-label="Estudiantes" interface="popover"
+                  placeholder="Selecciona el Estudiante"
+                  (ionChange)="GetDataIdEstudiante($event.detail.value)">
+                  <ion-select-option *ngFor="let Estudiante of Estudiantes"
+                    [value]="Estudiante">
+                    {{ Estudiante.NombreEst }} {{ Estudiante.ApellidoEst }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
 
-            <ion-item>
-              <ion-select formControlName="Motivo" aria-label="Motivos" interface="popover" placeholder="Seleciona el Motivo" >
-                <ion-select-option *ngFor="let Motivo of Motivos" [value]="Motivo"> {{ Motivo }} </ion-select-option>
-              </ion-select>
-            </ion-item>
+              <ion-item>
+                <ion-select formControlName="motivo" aria-label="Motivos"
+                  interface="popover" placeholder="Seleciona el Motivo">
+                  <ion-select-option *ngFor="let Motivo of Motivos"
+                    [value]="Motivo"> {{ Motivo }} </ion-select-option>
+                </ion-select>
+              </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Descripcion</ion-label>
-              <ion-input type="text" formControlName="Descripcion"></ion-input>
-            </ion-item>
+              <ion-item>
+                <ion-label position="floating">Descripcion</ion-label>
+                <ion-input type="text"
+                  formControlName="Descripcion"></ion-input>
+              </ion-item>
 
-            <ion-item>
-              <ion-label position="start">Evidencia</ion-label>
+              <ion-item>
+                <ion-label position="start">Evidencia</ion-label>
 
-              <ion-button slot="end" (click)="selectFile()" >
-                <ion-icon name="cloud-upload-outline"></ion-icon>
-              </ion-button>
-              <input type="file" #fileInput accept="image/jpeg, image/png" hidden (change)="uploadFile($event)">
-              
-              <!-- Mensaje de estado -->
-              <p *ngIf="uploadMessage">{{ uploadMessage }}</p>
-              
-              <!-- Vista previa de la imagen cargada -->
-              <img *ngIf="base64Image" [src]="base64Image" alt="Evidencia" style="width: 100px; height: auto;">
-              
-            </ion-item>
-            
-            <ion-item>
-              <ion-label position="start">Agendar cita</ion-label>
+                <ion-button slot="end" (click)="selectFile()">
+                  <ion-icon name="cloud-upload-outline"></ion-icon>
+                </ion-button>
+                <input type="file" #fileInput accept="image/jpeg, image/png"
+                  hidden (change)="uploadFile($event)">
 
-              <ion-checkbox justify="end" (ionChange)="toggleCalendar($event)"></ion-checkbox>
-            </ion-item>
-            <ion-item *ngIf="showCalendar">
-              <ion-datetime formControlName="cita" presentation="date-time" class="datetime-spacer"></ion-datetime>
-            </ion-item>
-            
-            
-            
+                <!-- Mensaje de estado -->
+                <p *ngIf="uploadMessage">{{ uploadMessage }}</p>
 
-            <ion-button type="submit" expand="block" [disabled]="!formularioEsquela.valid" class="custom-buttonregister"><ion-icon name="add-outline"></ion-icon>Registrar Esquela</ion-button>
-          </form>
-        </ion-list>
+                <!-- Vista previa de la imagen cargada -->
+                <img *ngIf="base64Image" [src]="base64Image" alt="Evidencia"
+                  style="width: 100px; height: auto;">
+
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="start">Agendar cita</ion-label>
+
+                <ion-checkbox justify="end"
+                  (ionChange)="toggleCalendar($event)"></ion-checkbox>
+              </ion-item>
+              <ion-item *ngIf="showCalendar">
+                <ion-datetime formControlName="cita" presentation="date-time"
+                  class="datetime-spacer"></ion-datetime>
+              </ion-item>
+
+              <ion-button type="submit" expand="block"
+                [disabled]="!formularioEsquela.valid"
+                class="custom-buttonregister"><ion-icon
+                  name="add-outline"></ion-icon>Registrar Esquela</ion-button>
+            </form>
+          </ion-list>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -9,7 +9,7 @@ import { EsquelasService } from '../../services/getEsquelas/esquelas.service';
   templateUrl: './vista-esquela-docente.page.html',
   styleUrls: ['./vista-esquela-docente.page.scss'],
 })
-export class VistaEsquelaDocentePage implements OnInit {
+export class VistaEsquelaDocentePage {
   username: string = '';
   esquelas: any[] = [];
   constructor(
@@ -17,9 +17,9 @@ export class VistaEsquelaDocentePage implements OnInit {
     private menu: MenuController,
     private authService: AuthService,
     private esquelasService: EsquelasService
-  ) { }
+  ) {}
 
-  ngOnInit() {}
+  //ngOnInit() {}
   ionViewDidEnter() {
     this.authService.AutentificatorLogin();
 
@@ -44,7 +44,7 @@ export class VistaEsquelaDocentePage implements OnInit {
     this.esquelasService.getEsquelasIdAsignacionDocenteMateria().subscribe(
       (data) => {
         this.esquelas = data;
-        console.log(this.esquelas);
+        // console.log(this.esquelas);
       },
       (error) => {
         console.error('Error al obtener las esquelas:', error);

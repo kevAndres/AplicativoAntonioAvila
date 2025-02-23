@@ -1,0 +1,35 @@
+.table-header {
+  background-color: #3086d6;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.action-buttons ion-button {
+  margin-right: 5px; /* Espacio entre botones */
+}
+
+.add-button {
+  margin-top: 20px;
+  width: 100%;
+}
+.custom-modal-size {
+  --width: 400px; /* Ajusta el ancho */
+  --height: 100px; /* Ajusta la altura */
+  --border-radius: 10px; /* Opcional: redondea bordes */
+  --max-width: 90%; /* Asegúrate de que se adapte a pantallas pequeñas */
+  --max-height: 90%;
+}
+@media (min-width: 768px) {
+  .custom-modal-size {
+    --width: 600px;
+    --height: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-modal-size {
+    --width: 90%;
+    --height: 80%;
+  }
+}

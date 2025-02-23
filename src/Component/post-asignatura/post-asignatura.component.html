@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Agregar Una Asignatura</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">CERRAR</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="form-container">
+
+  <ion-card class="form-card">
+    <ion-card-header class="welcome-subtitle">Ingrese los datos de la
+      Asignatura</ion-card-header>
+    <ion-item>
+      <ion-label position="floating">Asignatura</ion-label>
+      <ion-input [(ngModel)]="asignatura.asig_nombre"
+        (ionInput)="convertToUppercase($event)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Selecciona la Jornada</ion-label>
+      <ion-select [(ngModel)]="asignatura.jornada_id">
+        <ion-select-option *ngFor="let jornada of jornadas"
+          [value]="jornada.jor_id">
+          {{ jornada.jor_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Selecciona el Nivel Academico</ion-label>
+      <ion-select [(ngModel)]="asignatura.nivel_id">
+        <ion-select-option *ngFor="let niveles of nivelAcademico"
+          [value]="niveles.nivel_id">
+          {{ niveles.nivel_descripcion }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-buttons class="button-group">
+      <ion-button class="cancel-button"
+        (click)="closeModal()">Cancelar</ion-button>
+      <ion-button class="save-button"
+        (click)="submitData()">Guardar</ion-button>
+    </ion-buttons>
+  </ion-card>
+</div>

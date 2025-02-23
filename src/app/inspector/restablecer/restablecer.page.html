@@ -7,18 +7,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Cedula del Usuario</ion-label>
-      <ion-input formControlName="userId" type="text"></ion-input>
-    </ion-item>
+<ion-content class="ion-content-paguinas">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="4" offset-md="4" size-lg="6" offset-lg="3">
+        <ion-card class="ion-card-header">
+          <ion-card-subtitle class="welcome-subtitle">Ingrese los datos para
+            restablecer la contraseña</ion-card-subtitle>
+          <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-label position="floating">Cedula del Usuario</ion-label>
+              <ion-input formControlName="userId" type="text"></ion-input>
+            </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Nueva Contraseña</ion-label>
-      <ion-input formControlName="newPassword" type="password"></ion-input>
-    </ion-item>
+            <ion-item>
+              <ion-label position="floating">Nueva Contraseña</ion-label>
+              <ion-input formControlName="newPassword"
+                type="password"></ion-input>
+            </ion-item>
+            <!-- 
+            <ion-button expand="full" type="submit"
+              [disabled]="!changePasswordForm.valid"
+              class="custom-buttonregister" name="add-outline">Cambiar
+              Contraseña</ion-button> -->
 
-    <ion-button expand="full" type="submit" [disabled]="!changePasswordForm.valid">Cambiar Contraseña</ion-button>
-  </form>
+            <ion-button type="submit" expand="block"
+              [disabled]="!changePasswordForm.valid"
+              class="custom-buttonregister"> <ion-icon
+                name="reload-outline"></ion-icon> Cambiar
+              Contraseña</ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

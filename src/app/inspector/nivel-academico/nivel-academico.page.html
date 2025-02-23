@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/configuracion"></ion-back-button>
+    </ion-buttons>
+    <ion-title>GESTION DE NIVELES ACADEMICOS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-content-paguinas">
+  <ion-grid>
+    <!-- Encabezados de la tabla -->
+    <ion-row class="table-header">
+      <ion-col offset-sm="2">NOMBRE</ion-col>
+      <ion-col offset-sm="2">JORNADA</ion-col>
+      <ion-col>ACCIONES</ion-col>
+    </ion-row>
+    <!-- Filas de la tabla generadas dinámicamente -->
+    <ion-row *ngFor="let nivelAcademico of nivelesAcademicos" class="table-row">
+      <ion-col offset-sm="2">{{
+        nivelAcademico.nivel_descripcion}}</ion-col>
+      <ion-col offset-sm="2">{{
+        nivelAcademico.jornada.jor_nombre}}
+      </ion-col>
+      <ion-col class="action-buttons">
+        <ion-button color="warning"
+          (click)="editNivelAcademico(nivelAcademico.nivel_id)">EDITAR</ion-button>
+        <ion-button color="danger"
+          (click)="deleteNivelAcademico(nivelAcademico.nivel_id)">ELIMINAR</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- Botón fuera de la tabla -->
+</ion-content>
+<!--boton flotante-->
+<ion-fab slot="fixed" vertical="bottom" horizontal="end"
+  (click)="addNivelAcademico()"
+  class="tooltip-container">
+  <ion-fab-button> <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <span class="tooltip-text">Click para Registrar un Nivel Academico</span>
+</ion-fab>

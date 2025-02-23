@@ -247,6 +247,8 @@ const routes: Routes = [
       import('./admin/inspector-crud/inspector-crud.module').then(
         (m) => m.InspectorCrudPageModule
       ),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRoles: ['INSPECTOR', 'ADMIN'] },
   },
   {
     path: 'pdf-curso',
@@ -289,6 +291,33 @@ const routes: Routes = [
       import('./Docente/reportes/reportes.module').then(
         (m) => m.ReportesPageModule
       ),
+  },
+  {
+    path: 'especialidad',
+    loadChildren: () =>
+      import('./inspector/especialidad/especialidad.module').then(
+        (m) => m.EspecialidadPageModule
+      ),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRoles: ['INSPECTOR', 'ADMIN'] },
+  },
+  {
+    path: 'jornada',
+    loadChildren: () =>
+      import('./inspector/jornada/jornada.module').then(
+        (m) => m.JornadaPageModule
+      ),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRoles: ['INSPECTOR', 'ADMIN'] },
+  },
+  {
+    path: 'nivel-academico',
+    loadChildren: () =>
+      import('./inspector/nivel-academico/nivel-academico.module').then(
+        (m) => m.NivelAcademicoPageModule
+      ),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRoles: ['INSPECTOR', 'ADMIN'] },
   },
 ];
 

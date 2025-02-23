@@ -7,14 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { AsignaturaCrudPageRoutingModule } from './asignatura-crud-routing.module';
 
 import { AsignaturaCrudPage } from './asignatura-crud.page';
+import { EditAsignaturaComponent } from 'src/Component/edit-asignatura/edit-asignatura.component';
+import { PostAsignaturaComponent } from 'src/Component/post-asignatura/post-asignatura.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AsignaturaCrudPageRoutingModule
+    AsignaturaCrudPageRoutingModule,
   ],
-  declarations: [AsignaturaCrudPage]
+  declarations: [
+    AsignaturaCrudPage,
+    EditAsignaturaComponent,
+    PostAsignaturaComponent,
+  ],
 })
 export class AsignaturaCrudPageModule {}

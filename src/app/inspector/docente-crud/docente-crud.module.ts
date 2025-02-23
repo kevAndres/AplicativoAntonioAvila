@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { DocenteCrudPageRoutingModule } from './docente-crud-routing.module';
 
 import { DocenteCrudPage } from './docente-crud.page';
+import { PostUserComponent } from 'src/Component/post-user/post-user.component';
+import { EditUserComponent } from 'src/Component/edit-user/edit-user.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DocenteCrudPageRoutingModule
+    DocenteCrudPageRoutingModule,
   ],
-  declarations: [DocenteCrudPage]
+  declarations: [DocenteCrudPage, PostUserComponent, EditUserComponent],
 })
 export class DocenteCrudPageModule {}

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms'; // Asegúrate de importar 
 import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
+import { JornadaSelectorModalComponent } from 'src/Component/jornada-selector-modal/jornada-selector-modal.component';
 
 @NgModule({
   imports: [
@@ -12,8 +13,8 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, JornadaSelectorModalComponent],
 })
 export class HomePageModule {}

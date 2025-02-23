@@ -1,22 +1,85 @@
 .table-header {
-    background-color: #3086d6;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .table-row {
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .action-buttons ion-button {
-    margin-right: 5px; /* Espacio entre botones */
-  }
-  
-  .add-button {
-    margin-top: 20px;
-    width: 100%;
-  }
-  
+  //position: fixed; /* Fijado en la parte superior */
+  top: 19%; /* Posición fija */
+  z-index: 100; /* Más alto que el filtro */
+  width: 100%; /* Ocupa todo el ancho */
+  height: 5%; /* Altura fija */
+  background-color: #3086d6;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.table-row {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.action-buttons ion-button {
+  margin-right: 5px; /* Espacio entre botones */
+}
+
+.add-button {
+  margin-top: 20px;
+  width: 100%;
+}
+//estilo para el selector para el filtro
+/* Contenedor del selector */
+.selector-container {
+  position: sticky; /* Hace que se quede visible en la parte superior */
+  top: 0; /* Fijado en la parte superior de la pantalla */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  padding: 10px; /* Espaciado interno */
+  background: linear-gradient(135deg, #495575, #313d5c);
+  display: flex;
+  justify-content: left; /* Centra horizontalmente */
+  align-items: center; /* Alinea los elementos verticalmente */
+  // margin: 20px 0; /* Margen para separación */
+  //background-color: ;
+}
+
+/* Botón del selector */
+.selector-button {
+  max-width: 400px; /* Ancho máximo del botón */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 10px 15px; /* Espaciado interno */
+  font-size: 12px; /* Tamaño del texto */
+  font-weight: bold; /* Negrita */
+  text-align: center; /* Texto centrado */
+  color: var(--ion-color-light); /* Texto blanco */
+  //background-color: var(--ion-color-primary); /* Fondo azul */
+  //border-radius: 10px; /* Bordes redondeados */
+  //border: none; /* Sin bordes adicionales */
+  //box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+  overflow: hidden; /* Evita desbordamientos de texto */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  text-overflow: ellipsis; /* Agrega "..." si el texto es demasiado largo */
+}
+
+/* Hover y focus */
+// .selector-button:hover {
+//   //background-color: var(--ion-color-primary-shade); /* Azul más oscuro */
+// }
+
+// .selector-button:focus {
+//   //outline: none;
+//   //box-shadow: 0 0 8px var(--ion-color-primary); /* Resalte azul al enfocar */
+// }
+
+/* Ocultar el selector de roles */
+ion-select {
+  display: none;
+}
+/* Fondo desenfocado entre el filtro y la cabecera */
+.filter-background {
+  position: fixed; /* Fijado en la parte superior */
+  top: 0; /* Empieza desde el inicio de la pantalla */
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100px; /* Altura entre el filtro y la cabecera */
+  z-index: 999; /* Debajo del filtro pero encima del contenido */
+  background: linear-gradient(135deg, #495575, #313d5c);
+  backdrop-filter: blur(10px); /* Efecto desenfocado */
+  pointer-events: none; /* Permite que los clics pasen al contenido detrás */
+}

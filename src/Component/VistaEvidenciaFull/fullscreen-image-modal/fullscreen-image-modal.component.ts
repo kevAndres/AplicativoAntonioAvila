@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -10,10 +10,9 @@ export class FullscreenImageModalComponent implements OnInit {
   @Input() image!: string;
 
   constructor(private modalController: ModalController) {}
-ngOnInit(): void {
-  console.log('Base64 Image:', this.image);
-
-}
+  ngOnInit(): void {
+    console.log('Base64 Image:');
+  }
   dismiss() {
     this.modalController.dismiss();
   }

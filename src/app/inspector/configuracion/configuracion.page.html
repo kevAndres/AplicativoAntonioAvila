@@ -11,40 +11,74 @@
   </ion-toolbar>
 
 </ion-header>
-<ion-content color="light">
-  <ion-list [inset]="true">
-    <ion-item routerLink="/curso-crud" lines="none" class="interactive-item">
-      <ion-icon name="school-outline" size="large"  slot="start" class="custom-icon"></ion-icon>
-      <ion-label class="custom-label">Cursos </ion-label>
-    </ion-item>
+<ion-content class="ion-content-paguinas">
+  <ion-card class="ion-card-header">
+    <ion-list [inset]="true">
+      <ion-item routerLink="/curso-crud" lines="none" class="interactive-item">
+        <ion-icon name="school-outline" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+        <ion-label class="custom-label">Cursos </ion-label>
+      </ion-item>
 
-    <ion-item routerLink="/asignatura-crud" lines="none" class="interactive-item">
-      <ion-icon name="flask" size="large" slot="start" class="custom-icon"></ion-icon>
-      <ion-label class="custom-label">Asignaturas </ion-label>
-    </ion-item>
+      <ion-item routerLink="/asignatura-crud" lines="none"
+        class="interactive-item">
+        <ion-icon name="library-outline" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+        <ion-label class="custom-label">Asignaturas </ion-label>
+      </ion-item>
 
-    <ion-item routerLink="/docente-crud" lines="none" class="interactive-item">
-      <ion-icon name="people" size="large"slot="start" class="custom-icon"></ion-icon>
-      <ion-label class="custom-label">Docentes </ion-label>
-    </ion-item>
+      <ion-item routerLink="/docente-crud" lines="none"
+        class="interactive-item">
+        <ion-icon name="people" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+        <ion-label class="custom-label">Usuarios </ion-label>
+      </ion-item>
 
-    <ion-item routerLink="/representante-crud" lines="none" class="interactive-item">
-      <ion-icon name="person" size="large" slot="start" class="custom-icon"></ion-icon>
+      <!-- <ion-item routerLink="/representante-crud" lines="none"
+      class="interactive-item">
+      <ion-icon name="person" size="large" slot="start"
+        class="custom-icon"></ion-icon>
       <ion-label class="custom-label">Representantes </ion-label>
-    </ion-item>
-    
-    <ion-item routerLink="/estudiante-crud" lines="none" class="interactive-item">
-      <ion-icon name="happy" size="large" slot="start" class="custom-icon"></ion-icon>
+    </ion-item> -->
+      <!-- 
+    <ion-item routerLink="/estudiante-crud" lines="none"
+      class="interactive-item">
+      <ion-icon name="happy" size="large" slot="start"
+        class="custom-icon"></ion-icon>
       <ion-label class="custom-label">Estudiantes </ion-label>
-    </ion-item>
-    <ion-item routerLink="/restablecer" lines="none" class="interactive-item">
-      <ion-icon name="lock-closed-outline" size="large" slot="start" class="custom-icon"></ion-icon>
- 
-      <ion-label class="custom-label">Restablecer Contraseña  </ion-label>
-    </ion-item>
-    <ion-item routerLink="/home" (click)="logout()" lines="none" class="interactive-item">
-      <ion-icon name="log-out-outline"  size="large" slot="start" class="custom-icon"></ion-icon>
-      <ion-label class="custom-label">Cerrar sesion </ion-label>
-    </ion-item>
-  </ion-list>
+    </ion-item> -->
+      <ion-item routerLink="/especialidad" lines="none"
+        class="interactive-item">
+        <ion-icon name="albums-outline" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+        <ion-label class="custom-label">Especialidad</ion-label>
+      </ion-item>
+
+      <ion-item routerLink="/jornada" lines="none"
+        class="interactive-item">
+        <ion-icon name="briefcase-outline" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+        <ion-label class="custom-label">Jornada</ion-label>
+      </ion-item>
+
+      <ion-item routerLink="/nivel-academico" lines="none"
+        class="interactive-item">
+        <ion-icon name="trail-sign-outline" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+        <ion-label class="custom-label">Nivel Academico</ion-label>
+      </ion-item>
+      <ion-item routerLink="/restablecer" lines="none" class="interactive-item">
+        <ion-icon name="lock-closed-outline" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+
+        <ion-label class="custom-label">Restablecer Contraseña </ion-label>
+      </ion-item>
+      <ion-item routerLink="/home" (click)="logout()" lines="none"
+        class="interactive-item">
+        <ion-icon name="log-out-outline" size="large" slot="start"
+          class="custom-icon"></ion-icon>
+        <ion-label class="custom-label">Cerrar sesion </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

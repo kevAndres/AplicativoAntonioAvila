@@ -1,5 +1,10 @@
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
-import {  FormBuilder,  FormGroup,  Validators,  AbstractControl,} from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { EstudiantesService } from '../../services/getestudiantes/estudiantes.service';
 import { MenuController, AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
@@ -24,15 +29,14 @@ export class AtrasosPage implements OnInit {
   Estudiantes: any[] = [];
   public TitleHeader: string;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private EstudiantesService: EstudiantesService,
     private menu: MenuController,
     private alertController: AlertController,
     private authService: AuthService,
-    private router: Router,    private HeaderServiceService: HeaderServiceService
-
+    private router: Router,
+    private HeaderServiceService: HeaderServiceService
   ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
     this.formularioatrasos = this.formBuilder.group({
@@ -102,7 +106,7 @@ export class AtrasosPage implements OnInit {
     this.authService.RegisterAtrasos({ descripcion }).subscribe({
       next: (response) => {
         // Manejo de la respuesta exitosa
-        console.log(response);
+        // console.log(response);
         this.presentConfirmacion('Atraso registrado exitosamente');
         this.formularioatrasos.reset(); // Limpiar el formulario
       },
@@ -122,6 +126,7 @@ export class AtrasosPage implements OnInit {
     this.EstudiantesService.getCursos().subscribe({
       next: (data) => {
         this.cursos = data;
+        // console.log('cursos', this.cursos);
       },
       error: (error) => {
         console.error('Error al cargar cursos', error);
@@ -140,7 +145,7 @@ export class AtrasosPage implements OnInit {
   GetDataAsignaturaCurso(event: any) {
     const cursoId = event.detail.value;
     localStorage.setItem('curso', cursoId);
-    console.log(localStorage.getItem('curso'));
+    // console.log(localStorage.getItem('curso'));
 
     // Llamar al método para cargar estudiantes del curso seleccionado
     this.loadEstudiantesCurso();
@@ -164,20 +169,20 @@ export class AtrasosPage implements OnInit {
   async searchByCedula() {
     const cedula = this.formularioatrasos.get('cedula')?.value;
     if (cedula) {
-      console.log(`Buscando estudiante con cédula: ${cedula}`);
+      // console.log(`Buscando estudiante con cédula: ${cedula}`);
       this.EstudiantesService.getIDESTfromCedula(cedula).subscribe(
         async (data: any) => {
           // Asegúrate de que data sea tratado como un objeto
-          console.log('Respuesta del servicio:', data);
+          // console.log('Respuesta del servicio:', data);
 
           // Verifica si data es un objeto y contiene la propiedad idEstudiantes
           if (data && data.idEstudiantes) {
-            console.log('Estudiante encontrado:', data);
+            // console.log('Estudiante encontrado:', data);
             localStorage.setItem('Estudiante', data.idEstudiantes); // Guarda el ID del estudiante en el localStorage
-            console.log(
-              'ID del estudiante guardado en localStorage:',
-              localStorage.getItem('Estudiante')
-            );
+            // console.log(
+            //   'ID del estudiante guardado en localStorage:',
+            //   localStorage.getItem('Estudiante')
+            // );
             const alert = await this.alertController.create({
               header: 'Registrar Atraso',
               message: `Registrar atraso de ${data.NombreEst} ${data.ApellidoEst} con cédula ${cedula}`,
@@ -218,6 +223,6 @@ export class AtrasosPage implements OnInit {
   //Metodo que guarda el ID del estudiante para el envio a la API
   GetDataIdEstudiante(estudiante: any) {
     localStorage.setItem('Estudiante', estudiante.idEstudiantes);
-    console.log(estudiante.idEstudiantes);
+    // console.log(estudiante.idEstudiantes);
   }
 }

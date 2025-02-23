@@ -1,0 +1,13 @@
+.center-content {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 50%; /* Altura completa para centrado */
+  overflow-y: auto; /* Habilitar scroll solo cuando sea necesario */
+}
+
+.form-container {
+  width: 100%;
+  max-width: 600px; /* Limitar el ancho máximo del formulario */
+  padding: 16px;
+}

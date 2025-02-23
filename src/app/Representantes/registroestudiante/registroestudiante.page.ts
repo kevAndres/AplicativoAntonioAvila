@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { EstudiantesService } from '../../services/getestudiantes/estudiantes.service';
 import { MenuController } from '@ionic/angular';
 import { HeaderServiceService } from 'src/Shares/Services/header-service.service';
+import { CursoGet } from 'src/app/inspector/services/inpector-service.service';
 
 @Component({
   selector: 'app-registroestudiante',
@@ -16,11 +17,11 @@ import { HeaderServiceService } from 'src/Shares/Services/header-service.service
 @Injectable({
   providedIn: 'root',
 })
-export class RegistroestudiantePage implements OnInit {
+export class RegistroestudiantePage {
   formularioEstudiante: FormGroup;
   representados: any[] = [];
   username: string = '';
-  cursos: any[] = [];
+  cursos: CursoGet[] = [];
   public TitleHeader: string;
 
   private subscriptions: Subscription = new Subscription();
@@ -34,18 +35,17 @@ export class RegistroestudiantePage implements OnInit {
     private routerOutlet: IonRouterOutlet,
     private menu: MenuController,
     private HeaderServiceService: HeaderServiceService
-
   ) {
     this.TitleHeader = this.HeaderServiceService.appTitle;
     this.formularioEstudiante = this.formBuilder.group({
       NombreEst: ['', [Validators.required, Validators.minLength(3)]],
       ApellidoEst: ['', [Validators.required, Validators.minLength(3)]],
       cedula: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      curso_idCurso: ['', [Validators.required]],
+      curso_id: ['', [Validators.required]],
     });
   }
 
-  ngOnInit() {}
+  //ngOnInit() {}
 
   async presentError(message: string) {
     const alert = await this.alertController.create({
@@ -95,13 +95,18 @@ export class RegistroestudiantePage implements OnInit {
   }
   registrarEstudiante() {
     if (this.formularioEstudiante.valid) {
+      this.formularioEstudiante.value.NombreEst =
+        this.formularioEstudiante.value.NombreEst.toUpperCase();
+      this.formularioEstudiante.value.ApellidoEst =
+        this.formularioEstudiante.value.ApellidoEst.toUpperCase();
+
       // Llama al método register del AuthService y pasa los datos del formulario
       this.authService
         .registerEstudiante(this.formularioEstudiante.value)
         .subscribe({
           next: (response) => {
             // Manejo de la respuesta exitosa
-            console.log('Estudiante registrado exitosamente', response);
+            // console.log('Estudiante registrado exitosamente', response);
             this.router.navigate(['/paguinaprincipalrepresentante']); // Navegar de regreso
           },
           error: (error) => {
