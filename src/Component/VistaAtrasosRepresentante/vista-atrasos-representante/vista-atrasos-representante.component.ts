@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetAtrasosService } from '../../../app/services/getAtrasos/get-atrasos.service';
 import { EstudiantesService } from 'src/app/services/getestudiantes/estudiantes.service';
 import { AuthService } from '../../../app/services/auth.service';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { FullscreenImageModalComponent } from '../../../Component/VistaEvidenciaFull/fullscreen-image-modal/fullscreen-image-modal.component';
 
 interface Esquela {
@@ -29,7 +29,8 @@ export class VistaAtrasosRepresentanteComponent implements OnInit {
     private atrasosservice: GetAtrasosService,
     private EstudiantesService: EstudiantesService,
     private authService: AuthService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private loadingController: LoadingController
   ) {
     this.Nombreestudiante = '';
     this.Apellidosestudiante = '';
@@ -47,16 +48,23 @@ export class VistaAtrasosRepresentanteComponent implements OnInit {
   }
 
   async getEsquelas() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...',
+    });
+    await loading.present();
     this.atrasosservice.getAtrasosIdEstudiante().subscribe(
       (data: any[]) => {
         this.atrasos = data.map((item) => ({
           ...item,
           detailsVisible: false, // Añadimos la propiedad detailsVisible
         }));
+        loading.dismiss();
+
         console.log(this.atrasos);
       },
       (error) => {
         console.error('Error al obtener los atrasos :', error);
+        loading.dismiss();
       }
     );
   }

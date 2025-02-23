@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../app/services/getProfile/profile.service'; // Ajusta la ruta según la ubicación de tu servicio
-import { ModalController, AlertController } from '@ionic/angular'; // Importar ModalController y AlertController
+import {
+  ModalController,
+  AlertController,
+  LoadingController,
+} from '@ionic/angular'; // Importar ModalController y AlertController
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 
@@ -16,21 +20,28 @@ export class VistaUsuarioComponent implements OnInit {
   constructor(
     private ProfileService: ProfileService,
     private modalController: ModalController,
-    private alertController: AlertController // Inyectar AlertController
+    private alertController: AlertController, // Inyectar AlertController
+    private loadingController: LoadingController
   ) {}
 
   ngOnInit() {
     this.fetchUserInfo();
   }
 
-  fetchUserInfo() {
-    this.ProfileService.getUsuario().subscribe(
-      data => {
-        console.log('Datos recibidos:', data); // Verificar los datos recibidos
+  async fetchUserInfo() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...',
+    });
+    await loading.present();
+    await this.ProfileService.getUsuario().subscribe(
+      (data) => {
+        //console.log('Datos recibidos:', data); // Verificar los datos recibidos
         this.userInfo = data;
+        loading.dismiss();
       },
-      error => {
+      (error) => {
         console.error('Error al obtener la información del usuario', error);
+        loading.dismiss();
       }
     );
   }
@@ -45,11 +56,15 @@ export class VistaUsuarioComponent implements OnInit {
     if (!hasPermission) {
       return;
     }
-
-    this.ProfileService.getQR().subscribe(
-      async data => {
+    const loading = await this.loadingController.create({
+      message: 'Generando..',
+    });
+    await loading.present();
+    await this.ProfileService.getQR().subscribe(
+      async (data) => {
         console.log('QR Realizado:', data); // Verificar los datos recibidos
         this.QR = data.qrCodeDataURL;
+        loading.dismiss();
 
         try {
           // Convertir dataURL a Blob
@@ -59,16 +74,22 @@ export class VistaUsuarioComponent implements OnInit {
           reader.onloadend = async () => {
             const base64data = reader.result?.toString().split(',')[1];
             if (base64data && this.userInfo) {
-              const userName = `${this.userInfo.NombreEst}_${this.userInfo.ApellidoEst}`.replace(/ /g, '_');
+              const userName =
+                `${this.userInfo.NombreEst}_${this.userInfo.ApellidoEst}`.replace(
+                  / /g,
+                  '_'
+                );
 
               await Filesystem.writeFile({
                 path: `${userName}_QR.png`,
                 data: base64data,
-                directory: Directory.Documents
+                directory: Directory.Documents,
               });
 
               console.log('Archivo guardado correctamente');
-              this.presentAlert('Archivo guardado correctamente en la carpeta de documentos');
+              this.presentAlert(
+                'Archivo guardado correctamente en la carpeta de documentos'
+              );
             }
           };
           reader.readAsDataURL(blob);
@@ -77,7 +98,8 @@ export class VistaUsuarioComponent implements OnInit {
           this.presentAlert('Error al guardar el archivo: ' + error);
         }
       },
-      error => {
+      (error) => {
+        loading.dismiss();
         console.error('Error al Generar el QR', error);
         this.presentAlert('Error al Generar el QR: ' + error);
       }
@@ -88,7 +110,9 @@ export class VistaUsuarioComponent implements OnInit {
     if (Capacitor.isNativePlatform()) {
       const status = await Filesystem.requestPermissions();
       if (status.publicStorage !== 'granted') {
-        this.presentAlert('Necesitamos permisos de almacenamiento para guardar el QR.');
+        this.presentAlert(
+          'Necesitamos permisos de almacenamiento para guardar el QR.'
+        );
         return false;
       }
     }
@@ -99,7 +123,7 @@ export class VistaUsuarioComponent implements OnInit {
     const alert = await this.alertController.create({
       header: 'Información',
       message: message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     await alert.present();
   }

@@ -95,10 +95,11 @@ export class RegistroestudiantePage {
   }
   registrarEstudiante() {
     if (this.formularioEstudiante.valid) {
-      console.log(
-        'data para registrar el estdiadiante',
-        this.formularioEstudiante.value
-      );
+      this.formularioEstudiante.value.NombreEst =
+        this.formularioEstudiante.value.NombreEst.toUpperCase();
+      this.formularioEstudiante.value.ApellidoEst =
+        this.formularioEstudiante.value.ApellidoEst.toUpperCase();
+
       // Llama al método register del AuthService y pasa los datos del formulario
       this.authService
         .registerEstudiante(this.formularioEstudiante.value)

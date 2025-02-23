@@ -9,11 +9,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
-        <ion-card *ngIf="userInfo" class="user-card">
+      <ion-col size="12" size-md="8" offset-md="2" size-lg="7" offset-lg="2.5">
+        <ion-card *ngIf="userInfo" class="user-card-header">
           <ion-card-header>
             <div class="icon-container">
               <ion-icon name="person-outline" class="icon-xl"></ion-icon>
@@ -30,25 +30,40 @@
             </ion-row>
             <ion-row>
               <ion-col>
-                <ion-card-subtitle>Cédula: {{ userInfo.cedula
-                  }}</ion-card-subtitle>
+                <ion-card-subtitle>
+                  <ion-row>Cédula: {{ userInfo.cedula
+                    }}</ion-row>
 
-                <p>Curso: {{ userInfo.curso_idCurso }}</p>
-                <!--<p>ID Estudiante: {{ userInfo.idEstudiantes }}</p>
-                <p>ID Representante: {{ userInfo.representantes_idrepresentantes }}</p>-->
+                  <ion-row> Curso: {{ userInfo.curso.nivel_curso }}- "
+                    {{userInfo.curso.paralelo_curso}}"</ion-row>
+                  <ion-row>
+                    Nivel: {{ userInfo.curso.nivel_academico.nivel_descripcion
+                    }}</ion-row>
+                  <ion-row>
+                    Especialidad: {{
+                    userInfo.curso.especialidad.especialidad_nombre
+                    }}
+                  </ion-row>
+                  <ion-row>
+                    Jornada: {{
+                    userInfo.curso.nivel_academico.jornada.jor_nombre
+                    }}</ion-row>
+                </ion-card-subtitle>
               </ion-col>
 
             </ion-row>
             <ion-row>
               <ion-col>
-                <ion-button expand="block" class="custom-buttonregister" (click)="ShowQR()"> 
-                  OBTENER QR <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+                <ion-button expand="block" class="custom-buttonregister"
+                  (click)="ShowQR()">
+                  OBTENER QR <ion-icon slot="start"
+                    name="qr-code-outline"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-row>
             <ion-row *ngIf="QR">
               <ion-col>
-                  <img [src]="QR" alt="QR Code" class="qr-image" />
+                <img [src]="QR" alt="QR Code" class="qr-image" />
               </ion-col>
             </ion-row>
           </ion-card-content>
