@@ -37,7 +37,7 @@ export class EditUserComponent implements OnInit {
       email: this.user?.email || '',
       rol_id: this.user?.rol_id ?? null,
     };
-    console.log('nivel', this.nivel);
+    // console.log('nivel', this.nivel);
   }
 
   // Cerrar el modal sin enviar datos

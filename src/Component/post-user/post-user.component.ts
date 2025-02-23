@@ -113,7 +113,7 @@ export class PostUserComponent {
       this.emailError = 'Por favor, ingrese un correo electrónico válido.';
     } else {
       this.emailError = null;
-      console.log('Correo válido:', email);
+      // console.log('Correo válido:', email);
     }
   }
 

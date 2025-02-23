@@ -201,21 +201,21 @@ export class AuthService {
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if (data) {
-      console.log('token con la jornada seleccionada:', data);
+      // console.log('token con la jornada seleccionada:', data);
       this.dismissLoading();
 
       return data;
     } else {
-      console.log('El usuario cerró el modal sin seleccionar.');
+      // console.log('El usuario cerró el modal sin seleccionar.');
     }
   }
   completeLogin(response: any): void {
     if (response && response.token) {
-      console.log('Token recibido:', response.token);
+      // console.log('Token recibido:', response.token);
 
       // Guardar el token en localStorage
       localStorage.setItem('token', response.token);
-      console.log('Token guardado en localStorage.');
+      // console.log('Token guardado en localStorage.');
 
       // Decodificar el token para obtener información adicional (opcional)
       const decodedToken: any = jwtDecode(response.token);
@@ -226,12 +226,12 @@ export class AuthService {
         localStorage.setItem('userId', user.iduser);
         localStorage.setItem('userName', user.nombre);
         localStorage.setItem('userRole', decodedToken.idRol);
-        console.log('Información del usuario guardada:', user);
+        // console.log('Información del usuario guardada:', user);
       }
 
       // Redirigir al usuario al dashboard o a la página inicial
       this.router.navigate(['/dashboard']); // Asegúrate de configurar correctamente la ruta del dashboard
-      console.log('Redirigiendo al dashboard...');
+      // console.log('Redirigiendo al dashboard...');
     } else {
       console.error('El response no contiene un token válido.');
       this.presentAlert('Error: No se pudo completar el inicio de sesión.');
@@ -354,7 +354,7 @@ export class AuthService {
       estudiantes_idEstudiantes,
       asignación_docente_materia_idAsignacion,
     };
-    console.log('Datos del formulario:', JSON.stringify(body));
+    // console.log('Datos del formulario:', JSON.stringify(body));
     return this.http
       .post(`${this.apiUrlregister}/esquela/registrar`, body)
       .pipe(
@@ -416,7 +416,7 @@ export class AuthService {
     localStorage.removeItem('curso');
 
     // Aquí también podrías limpiar cualquier otro estado o almacenamiento local
-    console.log('Todos los datos de usuario han sido borrados.');
+    // console.log('Todos los datos de usuario han sido borrados.');
   }
 
   //METODOS PARA OBTENER USUARIOS POR ROLES

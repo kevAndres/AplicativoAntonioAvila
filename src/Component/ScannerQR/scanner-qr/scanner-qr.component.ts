@@ -1,9 +1,4 @@
-import {
-  Component,
-  AfterViewInit,
-  OnDestroy,
-  NgZone,
-} from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
 import {
   BarcodeScanner,
   BarcodeFormat,
@@ -97,9 +92,15 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
 
   async getEstudianteData(codigo: string) {
     try {
-      const estudiante = await this.estudiantesService.getEstudianteData(codigo).toPromise();
+      const estudiante = await this.estudiantesService
+        .getEstudianteData(codigo)
+        .toPromise();
       this.estudiantes_idEstudiantes = estudiante.idEstudiantes; // Almacena el id del estudiante
-      this.presentAlert(estudiante.NombreEst, estudiante.ApellidoEst, estudiante.cedula);
+      this.presentAlert(
+        estudiante.NombreEst,
+        estudiante.ApellidoEst,
+        estudiante.cedula
+      );
     } catch (error) {
       console.error('Error al obtener los datos del estudiante', error);
       this.presentError('Error al obtener los datos del estudiante: ' + error);
@@ -116,7 +117,7 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
           role: 'cancel',
           handler: () => {
             this.startScan();
-          }
+          },
         },
         {
           text: 'OK',
@@ -126,38 +127,38 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
             } else {
               console.error('No se encontró el id del estudiante');
             }
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
   }
 
   registrarAtraso(estudiantes_idEstudiantes: string) {
-    this.estudiantesService.registrarAtraso(estudiantes_idEstudiantes).subscribe({
-      next: (response) => {
-        console.log('Atraso registrado exitosamente', response);
-        this.presentConfirmacion('Atraso registrado exitosamente');
-        this.qrCodeData = null; // Reiniciar el valor del código QR para permitir un nuevo escaneo
-        this.startScan();
-
-      },
-      error: (error) => {
-        console.error('Error al registrar el atraso', error);
-        this.presentError('Error al registrar el atraso');
-        this.qrCodeData = null; // Reiniciar el valor del código QR para permitir un nuevo escaneo
-        this.startScan();
-
-      }
-    });
+    this.estudiantesService
+      .registrarAtraso(estudiantes_idEstudiantes)
+      .subscribe({
+        next: (response) => {
+          // console.log('Atraso registrado exitosamente', response);
+          this.presentConfirmacion('Atraso registrado exitosamente');
+          this.qrCodeData = null; // Reiniciar el valor del código QR para permitir un nuevo escaneo
+          this.startScan();
+        },
+        error: (error) => {
+          console.error('Error al registrar el atraso', error);
+          this.presentError('Error al registrar el atraso');
+          this.qrCodeData = null; // Reiniciar el valor del código QR para permitir un nuevo escaneo
+          this.startScan();
+        },
+      });
   }
 
   async presentConfirmacion(message: string) {
     const alert = await this.alertController.create({
       header: 'INFO',
       message: message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
 
     await alert.present();
@@ -167,7 +168,7 @@ export class ScannerQRComponent implements AfterViewInit, OnDestroy {
     const alert = await this.alertController.create({
       header: '¡UPS!',
       message: message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
 
     await alert.present();

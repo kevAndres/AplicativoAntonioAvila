@@ -60,7 +60,7 @@ export class VistaAtrasosRepresentanteComponent implements OnInit {
         }));
         loading.dismiss();
 
-        console.log(this.atrasos);
+        // console.log(this.atrasos);
       },
       (error) => {
         console.error('Error al obtener los atrasos :', error);

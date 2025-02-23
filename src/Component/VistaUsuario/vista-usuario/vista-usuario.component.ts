@@ -62,7 +62,7 @@ export class VistaUsuarioComponent implements OnInit {
     await loading.present();
     await this.ProfileService.getQR().subscribe(
       async (data) => {
-        console.log('QR Realizado:', data); // Verificar los datos recibidos
+        //console.log('QR Realizado:', data); // Verificar los datos recibidos
         this.QR = data.qrCodeDataURL;
         loading.dismiss();
 
@@ -86,7 +86,7 @@ export class VistaUsuarioComponent implements OnInit {
                 directory: Directory.Documents,
               });
 
-              console.log('Archivo guardado correctamente');
+              // console.log('Archivo guardado correctamente');
               this.presentAlert(
                 'Archivo guardado correctamente en la carpeta de documentos'
               );

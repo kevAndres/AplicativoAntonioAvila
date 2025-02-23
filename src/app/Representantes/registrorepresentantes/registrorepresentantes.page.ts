@@ -77,7 +77,7 @@ export class RegistrorepresentantesPage {
       // Llama al método register del servicio authService y pasa los datos
       this.authService.registerRepresentante(datosRegistro).subscribe({
         next: async (response) => {
-          console.log('Registro exitoso', response);
+          // console.log('Registro exitoso', response);
           await loading.dismiss(); // Oculta el loading cuando se complete la operación
           this.presentConfirmacion('Registro Exitoso');
           this.router.navigate(['/home']);

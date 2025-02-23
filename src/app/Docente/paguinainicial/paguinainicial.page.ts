@@ -59,7 +59,7 @@ export class PaguinainicialPage {
     this.EstudiantesService.getAsignaturasDocente().subscribe(
       (data) => {
         this.asignaturasdocente = data;
-        console.log('asignaturasdocente', this.asignaturasdocente);
+        // console.log('asignaturasdocente', this.asignaturasdocente);
       },
       (Error) => {
         console.error(
@@ -82,7 +82,7 @@ export class PaguinainicialPage {
     localStorage.setItem('curso', docente.curso_idCurso);
     localStorage.setItem('MateriaDocente', docente.IdAsignacion);
 
-    console.log(docente.asignatura_idasignatura);
-    console.log(docente.IdAsignacion);
+    // console.log(docente.asignatura_idasignatura);
+    // console.log(docente.IdAsignacion);
   }
 }

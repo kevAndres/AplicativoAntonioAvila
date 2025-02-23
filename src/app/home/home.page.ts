@@ -70,10 +70,10 @@ export class HomePage implements OnInit {
         //await this.presentLoading();
         const success = await this.authService.login(email, password);
         if (success) {
-          console.log('Inicio de sesión exitoso');
+          // console.log('Inicio de sesión exitoso');
           this.redirectBasedOnRole();
         } else {
-          console.log('Inicio de sesión fallido');
+          // console.log('Inicio de sesión fallido');
         }
       } catch (error) {
         console.error('Error en el inicio de sesión:', error);

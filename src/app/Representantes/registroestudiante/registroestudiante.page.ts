@@ -106,7 +106,7 @@ export class RegistroestudiantePage {
         .subscribe({
           next: (response) => {
             // Manejo de la respuesta exitosa
-            console.log('Estudiante registrado exitosamente', response);
+            // console.log('Estudiante registrado exitosamente', response);
             this.router.navigate(['/paguinaprincipalrepresentante']); // Navegar de regreso
           },
           error: (error) => {

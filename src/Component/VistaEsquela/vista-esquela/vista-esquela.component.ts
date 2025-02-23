@@ -87,7 +87,7 @@ export class VistaEsquelaComponent implements OnInit {
     // console.log(localStorage.getItem('IdEsquela'));
 
     // Ocultar los detalles de todas las esquelas, excepto de la que se hace clic
-    console.log('data para las  esquelas', esquela);
+    // console.log('data para las  esquelas', esquela);
     await this.esquelas.forEach((esquela) => {
       if (esquela.idEsquela !== esquela.idEsquela) {
         esquela.detailsVisible = false;

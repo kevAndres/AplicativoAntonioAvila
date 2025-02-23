@@ -77,7 +77,7 @@ export class RegistrodocentesPage implements OnInit {
       this.inspectorService.getJornadas().subscribe({
         next: (data) => {
           this.jornadas = data;
-          console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
+          // console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
           resolve(this.jornadas); // Resuelve la promesa con los datos cargados
         },
         error: (error) => {
@@ -126,7 +126,7 @@ export class RegistrodocentesPage implements OnInit {
       // Llama al método register del servicio authService y pasa los datos
       this.authService.registerDocente(datosRegistro).subscribe({
         next: async (response) => {
-          console.log('Registro exitoso', response);
+          // console.log('Registro exitoso', response);
           await loading.dismiss();
           this.presentConfirmacion('Resgistro Exitoso');
           // Navega a la ruta que desees tras un registro exitoso, por ejemplo '/login'

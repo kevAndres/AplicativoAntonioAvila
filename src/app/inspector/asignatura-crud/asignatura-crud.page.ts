@@ -115,7 +115,7 @@ export class AsignaturaCrudPage implements OnInit {
   }
   async editAsignatura(asig_id: number) {
     const asig = this.asignaturasGet.find((asig) => asig.asig_id == asig_id);
-    console.log('asig', asig);
+    // console.log('asig', asig);
     const modal = await this.modalCtrl.create({
       component: EditAsignaturaComponent, // Componente del modal
       componentProps: {
@@ -143,7 +143,7 @@ export class AsignaturaCrudPage implements OnInit {
             jornada_id: data.jornada_id,
           };
           me.present();
-          console.log('dataaaaaaaaaaa', data);
+          // console.log('dataaaaaaaaaaa', data);
           this.inspectorService.updateAsignatura(data).subscribe(() => {
             me.dismiss();
             this.loadAsignaturas();
@@ -160,7 +160,7 @@ export class AsignaturaCrudPage implements OnInit {
       this.inspectorService.getJornadas().subscribe({
         next: (data) => {
           this.jornadas = data;
-          console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
+          // console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
           resolve(this.jornadas); // Resuelve la promesa con los datos cargados
         },
         error: (error) => {
@@ -176,10 +176,10 @@ export class AsignaturaCrudPage implements OnInit {
       this.inspectorService.getNIvelesAcademicos().subscribe({
         next: (data) => {
           this.nivelesAcademicos = data;
-          console.log(
-            'ESPECIALIDADES cargadas correctamente:',
-            this.nivelesAcademicos
-          ); // Debugging
+          // console.log(
+          //   'ESPECIALIDADES cargadas correctamente:',
+          //   this.nivelesAcademicos
+          // ); // Debugging
           resolve(this.nivelesAcademicos); // Resuelve la promesa con los datos cargados
         },
         error: (error) => {

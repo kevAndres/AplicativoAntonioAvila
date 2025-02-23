@@ -53,7 +53,7 @@ export class VistaEsquelaDComponent implements OnInit {
           detailsVisible: false, // Añadimos la propiedad detailsVisible
           evidenciavisible: false, // Añadimos la propiedad evidenciavisible
         }));
-        console.log(this.esquelas);
+        // console.log(this.esquelas);
       },
       (error) => {
         console.error('Error al obtener las esquelas:', error);

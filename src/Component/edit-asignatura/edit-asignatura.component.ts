@@ -46,7 +46,7 @@ export class EditAsignaturaComponent implements OnInit {
 
   // Enviar los datos al componente principal
   submitData() {
-    console.log('curso', this.curso);
+    // console.log('curso', this.curso);
     this.modalCtrl.dismiss(this.curso);
   }
 

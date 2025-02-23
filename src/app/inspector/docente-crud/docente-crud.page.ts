@@ -70,7 +70,7 @@ export class DocenteCrudPage implements OnInit {
 
         // Copiar la lista completa de usuarios
         this.allUsuarios = [...this.usuariosByRoles];
-        console.log('usuarios', this.usuariosByRoles);
+        // console.log('usuarios', this.usuariosByRoles);
 
         loading.dismiss();
       },
@@ -120,7 +120,7 @@ export class DocenteCrudPage implements OnInit {
       const roles = await this._authService.getRolesSelector().subscribe(
         (roles) => {
           this.roles = roles;
-          console.log('roles', this.roles);
+          // console.log('roles', this.roles);
         },
         (error) => {
           console.error('Error loading roles', error);
@@ -144,7 +144,7 @@ export class DocenteCrudPage implements OnInit {
 
       // Procesar datos devueltos desde el modal
       const { data } = await modal.onWillDismiss();
-      console.log('data', data);
+      // console.log('data', data);
 
       if (data) {
         if (
@@ -191,11 +191,11 @@ export class DocenteCrudPage implements OnInit {
   }
   async editDocente(iduser: number) {
     try {
-      console.log('iduser', iduser);
+      // console.log('iduser', iduser);
       const user = await this.allUsuarios.find(
         (usuario) => usuario.iduser == iduser
       );
-      console.log('user', user);
+      // console.log('user', user);
       const modal = await this.modalCtrl.create({
         component: EditUserComponent,
         componentProps: {
@@ -208,7 +208,7 @@ export class DocenteCrudPage implements OnInit {
 
       // Procesar datos devueltos desde el modal
       const { data } = await modal.onWillDismiss();
-      console.log('dataaaaaaaaaaa', data);
+      // console.log('dataaaaaaaaaaa', data);
       if (data) {
         if (data) {
           const nuevoNivelAcademico: userPatch = {
@@ -290,7 +290,7 @@ export class DocenteCrudPage implements OnInit {
       this.inspectorService.getJornadas().subscribe({
         next: (data) => {
           this.jornadas = data;
-          console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
+          // console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
           resolve(this.jornadas); // Resuelve la promesa con los datos cargados
         },
         error: (error) => {

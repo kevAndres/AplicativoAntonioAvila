@@ -11,12 +11,17 @@ import { LoadingController, AlertController } from '@ionic/angular';
 })
 export class PdfCursoPage implements OnInit {
   cursos: any[] = [];
-  selectedCursoId: string ="";
-  url: string = APIURL
-  constructor(private alertController: AlertController,private EstudiantesService: EstudiantesService,private http: HttpClient,private loadingController: LoadingController) { }
+  selectedCursoId: string = '';
+  url: string = APIURL;
+  constructor(
+    private alertController: AlertController,
+    private EstudiantesService: EstudiantesService,
+    private http: HttpClient,
+    private loadingController: LoadingController
+  ) {}
 
   ngOnInit() {
-    this.loadCursos()
+    this.loadCursos();
   }
 
   loadCursos() {
@@ -34,8 +39,8 @@ export class PdfCursoPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'Por favor, seleccione un curso',
-        buttons: ['OK']
-      })
+        buttons: ['OK'],
+      });
       await alert.present();
     }
     if (this.selectedCursoId) {
@@ -43,7 +48,7 @@ export class PdfCursoPage implements OnInit {
         message: 'DESCARGANDO, POR FAVOR ESPERAR ...',
       });
       await loading.present();
-  
+
       try {
         const downloadUrl = `${this.url}/esquela/reportepdf/curso/${this.selectedCursoId}`;
         window.location.href = downloadUrl;
@@ -53,7 +58,7 @@ export class PdfCursoPage implements OnInit {
         await loading.dismiss();
       }
     } else {
-      console.log('Please select a curso before downloading.');
+      // console.log('Please select a curso before downloading.');
     }
   }
 }

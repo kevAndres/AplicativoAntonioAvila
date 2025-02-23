@@ -78,7 +78,7 @@ export class RegistroasignaturaPage {
     this.EstudiantesService.getAsignaturasPorNivelAcademicoJornada().subscribe({
       next: (data) => {
         this.asignaturas = data;
-        console.log('asignatruas de la paguina del docente', this.asignaturas);
+        // console.log('asignatruas de la paguina del docente', this.asignaturas);
       },
       error: (error) => {
         console.error('Error al cargar las asignaturas', error);
@@ -89,7 +89,7 @@ export class RegistroasignaturaPage {
     this.EstudiantesService.getCursosParams().subscribe({
       next: (data) => {
         this.cursos = data;
-        console.log('cursos', this.cursos);
+        // console.log('cursos', this.cursos);
       },
       error: (error) => {
         console.error('Error al cargar cursos', error);

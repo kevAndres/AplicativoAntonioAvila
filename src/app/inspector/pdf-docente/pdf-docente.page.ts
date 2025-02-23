@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { APIURL } from '../../../Shares/UrlApi';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController, AlertController } from '@ionic/angular';
-import {InpectorServiceService} from '../services/inpector-service.service'
+import { InpectorServiceService } from '../services/inpector-service.service';
 @Component({
   selector: 'app-pdf-docente',
   templateUrl: './pdf-docente.page.html',
@@ -10,12 +10,17 @@ import {InpectorServiceService} from '../services/inpector-service.service'
 })
 export class PdfDocentePage implements OnInit {
   docentes: any[] = [];
-  url: string = APIURL
-  selectedDocenteId: string ="";
-  constructor(private alertController: AlertController,private http: HttpClient,private loadingController: LoadingController, private inpectorServiceService:InpectorServiceService) { }
+  url: string = APIURL;
+  selectedDocenteId: string = '';
+  constructor(
+    private alertController: AlertController,
+    private http: HttpClient,
+    private loadingController: LoadingController,
+    private inpectorServiceService: InpectorServiceService
+  ) {}
 
   ngOnInit() {
-    this.loadDocentes()
+    this.loadDocentes();
   }
 
   loadDocentes() {
@@ -34,8 +39,8 @@ export class PdfDocentePage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'Por favor, seleccione un docente',
-        buttons: ['OK']
-      })
+        buttons: ['OK'],
+      });
       await alert.present();
     }
     if (this.selectedDocenteId) {
@@ -43,7 +48,7 @@ export class PdfDocentePage implements OnInit {
         message: 'DESCARGANDO, POR FAVOR ESPERAR ...',
       });
       await loading.present();
-  
+
       try {
         const downloadUrl = `${this.url}/esquela/reportepdf/docente/${this.selectedDocenteId}`;
         window.location.href = downloadUrl;
@@ -53,7 +58,7 @@ export class PdfDocentePage implements OnInit {
         await loading.dismiss();
       }
     } else {
-      console.log('Please select a curso before downloading.');
+      // console.log('Please select a curso before downloading.');
     }
   }
 }

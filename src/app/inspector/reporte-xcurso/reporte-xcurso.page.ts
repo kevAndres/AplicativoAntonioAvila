@@ -11,12 +11,17 @@ import { LoadingController, AlertController } from '@ionic/angular';
 })
 export class ReporteXcursoPage implements OnInit {
   cursos: any[] = [];
-  selectedCursoId: string ="";
-  url: string = APIURL
-  constructor(private alertController: AlertController,private EstudiantesService: EstudiantesService,private http: HttpClient,private loadingController: LoadingController) { }
+  selectedCursoId: string = '';
+  url: string = APIURL;
+  constructor(
+    private alertController: AlertController,
+    private EstudiantesService: EstudiantesService,
+    private http: HttpClient,
+    private loadingController: LoadingController
+  ) {}
 
   ngOnInit() {
-   this.loadCursos();
+    this.loadCursos();
   }
   loadCursos() {
     this.EstudiantesService.getCursos().subscribe({
@@ -33,8 +38,8 @@ export class ReporteXcursoPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'Por favor, seleccione un curso',
-        buttons: ['OK']
-      })
+        buttons: ['OK'],
+      });
       await alert.present();
     }
     if (this.selectedCursoId) {
@@ -42,7 +47,7 @@ export class ReporteXcursoPage implements OnInit {
         message: 'DESCARGANDO, POR FAVOR ESPERAR ...',
       });
       await loading.present();
-  
+
       try {
         const downloadUrl = `${this.url}/atraso/reporte/curso/${this.selectedCursoId}`;
         window.location.href = downloadUrl;
@@ -52,7 +57,7 @@ export class ReporteXcursoPage implements OnInit {
         await loading.dismiss();
       }
     } else {
-      console.log('Please select a fruit before downloading.');
+      // console.log('Please select a fruit before downloading.');
     }
   }
 }

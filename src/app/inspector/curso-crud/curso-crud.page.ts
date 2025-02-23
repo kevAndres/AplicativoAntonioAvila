@@ -41,7 +41,7 @@ export class CursoCRUDPage implements OnInit {
         this.loadEspecialidades(),
         this.loadNivelesAcademicos(),
       ]);
-      console.log('Datos cargados exitosamente');
+      // console.log('Datos cargados exitosamente');
     } catch (error) {
       console.error('Error al cargar los datos:', error);
     }
@@ -86,7 +86,7 @@ export class CursoCRUDPage implements OnInit {
     await modal.present();
     // Procesar datos devueltos desde el modal
     const { data } = await modal.onWillDismiss();
-    console.log('fdatas', data);
+    // console.log('fdatas', data);
     if (data) {
       if (
         data.nivel_curso &&
@@ -163,7 +163,7 @@ export class CursoCRUDPage implements OnInit {
       this.inspectorService.getJornadas().subscribe({
         next: (data) => {
           this.jornadas = data;
-          console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
+          // console.log('Jornadas cargadas correctamente:', this.jornadas); // Debugging
           resolve(this.jornadas); // Resuelve la promesa con los datos cargados
         },
         error: (error) => {
@@ -178,10 +178,10 @@ export class CursoCRUDPage implements OnInit {
       this.inspectorService.getEspecialidades().subscribe({
         next: (data) => {
           this.especialidades = data;
-          console.log(
-            'ESPECIALIDADES cargadas correctamente:',
-            this.especialidades
-          ); // Debugging
+          // console.log(
+          //   'ESPECIALIDADES cargadas correctamente:',
+          //   this.especialidades
+          // ); // Debugging
           resolve(this.especialidades); // Resuelve la promesa con los datos cargados
         },
         error: (error) => {
@@ -196,10 +196,10 @@ export class CursoCRUDPage implements OnInit {
       this.inspectorService.getNIvelesAcademicos().subscribe({
         next: (data) => {
           this.nivelesAcademicos = data;
-          console.log(
-            'ESPECIALIDADES cargadas correctamente:',
-            this.nivelesAcademicos
-          ); // Debugging
+          // console.log(
+          //   'ESPECIALIDADES cargadas correctamente:',
+          //   this.nivelesAcademicos
+          // ); // Debugging
           resolve(this.nivelesAcademicos); // Resuelve la promesa con los datos cargados
         },
         error: (error) => {

@@ -111,7 +111,7 @@ export class NivelAcademicoPage implements OnInit {
     const nivel = this.nivelesAcademicos.find(
       (nivel) => nivel.nivel_id == nivel_id
     );
-    console.log('asig', nivel);
+    // console.log('asig', nivel);
     const modal = await this.modalCtrl.create({
       component: EditNivelesAcademicosComponent, // Componente del modal
       componentProps: {

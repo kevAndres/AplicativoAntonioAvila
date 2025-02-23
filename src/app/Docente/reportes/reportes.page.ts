@@ -41,10 +41,10 @@ export class ReportesPage implements OnInit {
     this.EstudiantesService.getAsignaturasDocente().subscribe(
       (data) => {
         this.asignaturasdocente = data;
-        console.log(
-          'estos son los cursos',
-          JSON.stringify(this.asignaturasdocente)
-        );
+        // console.log(
+        //   'estos son los cursos',
+        //   JSON.stringify(this.asignaturasdocente)
+        // );
       },
       (Error) => {
         console.error(
@@ -61,7 +61,7 @@ export class ReportesPage implements OnInit {
     this.EstudiantesService.getEstudiantes(idCurso).subscribe(
       (data: any) => {
         this.estudiantes = data;
-        console.log(this.estudiantes);
+        // console.log(this.estudiantes);
       },
       (error) => {
         console.error('Error al obtener los estudiantes', error);

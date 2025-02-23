@@ -30,7 +30,7 @@ export class EditNivelesAcademicosComponent implements OnInit {
       nivel_descripcion: this.nivelAcademico?.nivel_descripcion || '',
       jor_id: this.nivelAcademico?.jornada.jor_id ?? null,
     };
-    console.log('nivel', this.nivel);
+    // console.log('nivel', this.nivel);
   }
 
   // Cerrar el modal sin enviar datos

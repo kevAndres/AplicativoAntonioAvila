@@ -45,7 +45,7 @@ export class VistaEsquelaRepresentantePage {
     this.esquelasService.getEsquelasIdEstudiante().subscribe(
       (data) => {
         this.esquelas = data;
-        console.log(this.esquelas);
+        // console.log(this.esquelas);
       },
       (error) => {
         console.error('Error al obtener las esquelas:', error);

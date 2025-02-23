@@ -119,10 +119,6 @@ export class EsquelaPage {
 
       // Establecer el valor en el control de formulario
       this.formularioEsquela.get('cita')!.setValue(currentDate);
-      console.log(
-        'Valor de cita establecido a la fecha y hora actuales en América/Guayaquil:',
-        currentDate
-      );
     }
     this.cdr.detectChanges(); // Forzar la detección de cambios
   }
@@ -153,11 +149,8 @@ export class EsquelaPage {
         cita: citaFormateada,
       };
 
-      console.log('Datos del formulario:', formData); // Para depurar
-
       this.authService.registerEsquela_API(formData).subscribe({
         next: (response) => {
-          console.log('Esquela registrada con éxito', response);
           this.dismissLoading();
           this.presentConfirmacion(response);
           this.router.navigate(['/paguinainicial']); // Navegar de regreso
@@ -196,7 +189,6 @@ export class EsquelaPage {
   }
   GetDataIdEstudiante(estudiante: any) {
     localStorage.setItem('Estudiante', estudiante.idEstudiantes);
-    console.log(estudiante.idEstudiantes);
   }
 
   selectFile(): void {
@@ -212,7 +204,6 @@ export class EsquelaPage {
       if (file.type.match(/image\/(jpeg|png)/)) {
         this.previewImage(file);
       } else {
-        console.log('Solo se permiten imágenes JPEG o PNG.');
         this.base64Image = null; // Resetear la vista previa si el tipo de archivo no es correcto
       }
     }
@@ -222,7 +213,6 @@ export class EsquelaPage {
     const reader = new FileReader();
     reader.onload = () => {
       this.base64Image = reader.result as string; // Guarda el resultado en base64
-      console.log(this.base64Image);
     };
     reader.readAsDataURL(file); // Convierte la imagen a base64
   }

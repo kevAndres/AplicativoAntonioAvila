@@ -53,10 +53,10 @@ export class PaguinaprincipalrepresentantePage {
       this.EstudiantesService.getRepresentados().subscribe(
         (data) => {
           this.representados = data;
-          console.log(
-            'todso lso representados',
-            JSON.stringify(this.representados)
-          );
+          // console.log(
+          //   'todso lso representados',
+          //   JSON.stringify(this.representados)
+          // );
         },
         (error) => {
           console.error('Error al cargar los representados', error);
@@ -84,9 +84,9 @@ export class PaguinaprincipalrepresentantePage {
     localStorage.setItem('NombreEstudiante', estudiante.NombreEst);
     localStorage.setItem('ApellidoEstudiante', estudiante.ApellidoEst);
 
-    console.log(localStorage.getItem('IdEstCurForEsquelas'));
-    console.log(localStorage.getItem('NombreEstudiante'));
-    console.log(localStorage.getItem('ApellidoEstudiante'));
+    // console.log(localStorage.getItem('IdEstCurForEsquelas'));
+    // console.log(localStorage.getItem('NombreEstudiante'));
+    // console.log(localStorage.getItem('ApellidoEstudiante'));
   }
   logout() {
     this.authService.limpiarrepresentados();
