@@ -7,28 +7,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-content-paguinas">
   <ion-grid>
     <ion-row>
-      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4"> 
-        <ion-list>
-          <div class="image-center">
-            <img src="assets/img/escudo(1).png" alt="Escudao" style="width: 100px; height: auto;">
-          </div>
-          <br>
-          <ion-label>
-            <h3>SELECCIONE EL DIA DEL QUE QUIERA DESCARGAR EL REPORTE :
-            </h3>
-          </ion-label>
+      <ion-col size-md="6" offset-md="3" size-lg="4" offset-lg="4">
+        <ion-card class="ion-card-header">
+          <ion-list>
+            <div class="image-center">
+              <img src="assets/img/escudo(1).png" alt="Escudao"
+                style="width: 100px; height: auto;">
+            </div>
+            <br>
+            <ion-label>
+              <h3>SELECCIONE EL DIA DEL QUE QUIERA DESCARGAR EL REPORTE :
+              </h3>
+            </ion-label>
 
-          
-          <ion-item>
-            <ion-datetime   [(ngModel)]="selectedDate" presentation="date"></ion-datetime>
-          </ion-item>
-          <ion-button (click)="downloadFile()">DESCARGAR REPORTE <ion-icon name="document-text-outline"></ion-icon> </ion-button>
-         
+            <ion-item>
+              <ion-datetime [(ngModel)]="selectedDate"
+                presentation="date"></ion-datetime>
+            </ion-item>
+            <ion-button (click)="downloadFile()">DESCARGAR REPORTE <ion-icon
+                name="document-text-outline"></ion-icon> </ion-button>
 
-        </ion-list>
+          </ion-list>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
